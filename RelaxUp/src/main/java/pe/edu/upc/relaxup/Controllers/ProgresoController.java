@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.relaxup.Dtos.ProgresoDTO;
-import pe.edu.upc.relaxup.Dtos.UsuarioDTO;
 import pe.edu.upc.relaxup.ServiceInterfaces.IProgresoService;
 
 import java.util.List;

@@ -19,14 +19,19 @@ public class Progreso {
     @Column(name = "observaciones",nullable = false,length = 200)
     private String observaciones;
 
+    @ManyToOne
+    @JoinColumn(name = "idMetaEmocional")
+    private MetaEmocional metaEmocional;
+
     public Progreso() {
     }
 
-    public Progreso(int idProgreso, int nivelControlIra, LocalDate fecha, String observaciones) {
+    public Progreso(int idProgreso, int nivelControlIra, LocalDate fecha, String observaciones, MetaEmocional metaEmocional) {
         this.idProgreso = idProgreso;
         this.nivelControlIra = nivelControlIra;
         this.fecha = fecha;
         this.observaciones = observaciones;
+        this.metaEmocional = metaEmocional;
     }
 
     public int getIdProgreso() {
@@ -59,5 +64,13 @@ public class Progreso {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public MetaEmocional getMetaEmocional() {
+        return metaEmocional;
+    }
+
+    public void setMetaEmocional(MetaEmocional metaEmocional) {
+        this.metaEmocional = metaEmocional;
     }
 }
