@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.relaxup.Dtos.InteraccionDTO;
-import pe.edu.upc.relaxup.Dtos.RolDTO;
-import pe.edu.upc.relaxup.Entities.Interaccion;
 import pe.edu.upc.relaxup.ServiceInterfaces.IInteraccionService;
 
 import java.util.List;

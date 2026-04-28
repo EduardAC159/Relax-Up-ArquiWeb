@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pe.edu.upc.relaxup.Dtos.ProgresoDTO;
 import pe.edu.upc.relaxup.Dtos.RolDTO;
 import pe.edu.upc.relaxup.ServiceInterfaces.IRolService;
 
