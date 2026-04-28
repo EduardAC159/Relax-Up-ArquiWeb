@@ -7,29 +7,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pe.edu.upc.relaxup.Dtos.InteraccionDTO;
-import pe.edu.upc.relaxup.ServiceInterfaces.IInteraccionService;
+import pe.edu.upc.relaxup.Dtos.RecursosDTO;
+import pe.edu.upc.relaxup.Dtos.RolDTO;
+import pe.edu.upc.relaxup.ServiceInterfaces.IRecursosService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/Interaccion")
-public class InteraccionController {
+@RequestMapping("/api/Recursos")
+public class RecursosController {
 
     @Autowired
-    private IInteraccionService iS;
+    private IRecursosService recS;
 
     @GetMapping
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
-        List<InteraccionDTO> ListarInteraccion = iS.list().stream()
-                .map(x->m.map(x, InteraccionDTO.class)).collect(Collectors.toList());
+        List<RecursosDTO> ListarRecursos = recS.list().stream()
+                .map(x->m.map(x,RecursosDTO.class)).collect(Collectors.toList());
 
-        if (ListarInteraccion.isEmpty())
+        if (ListarRecursos.isEmpty())
         {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay interacciones registrados");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay recursos registrados");
         }
-        return ResponseEntity.ok(ListarInteraccion);
+        return ResponseEntity.ok(ListarRecursos);
     }
 }

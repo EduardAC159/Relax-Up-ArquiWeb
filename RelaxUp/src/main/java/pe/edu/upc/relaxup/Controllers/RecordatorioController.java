@@ -1,6 +1,5 @@
 package pe.edu.upc.relaxup.Controllers;
 
-import jakarta.persistence.Id;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +29,7 @@ public class RecordatorioController {
 
         if (ListarRecordatorio.isEmpty())
         {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay roles registrados");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay recordatorios registrados");
         }
         return ResponseEntity.ok(ListarRecordatorio);
     }
