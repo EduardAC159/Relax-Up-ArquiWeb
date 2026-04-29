@@ -7,6 +7,8 @@ import pe.edu.upc.relaxup.Repositories.IRolRepository;
 import pe.edu.upc.relaxup.ServiceInterfaces.IRolService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class RolServiceImplement implements IRolService {
 
@@ -16,5 +18,27 @@ public class RolServiceImplement implements IRolService {
     @Override
     public List<Rol> list() {
         return rR.findAll();
+    }
+
+    @Override
+    public Rol insert(Rol rol) {
+        return rR.save(rol);
+    }
+
+    @Override
+    public void update(Rol rol) {
+        rR.save(rol);
+
+    }
+
+    @Override
+    public void delete(int id) {
+        rR.deleteById(id);
+
+    }
+
+    @Override
+    public Optional<Rol> listId(int id) {
+        return rR.findById(id);
     }
 }

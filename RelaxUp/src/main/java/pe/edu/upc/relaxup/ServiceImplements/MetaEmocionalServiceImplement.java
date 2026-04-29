@@ -7,6 +7,7 @@ import pe.edu.upc.relaxup.Repositories.IMetaEmocionalRepository;
 import pe.edu.upc.relaxup.ServiceInterfaces.IMetaEmocionalService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MetaEmocionalServiceImplement implements IMetaEmocionalService {
@@ -17,5 +18,27 @@ public class MetaEmocionalServiceImplement implements IMetaEmocionalService {
     @Override
     public List<MetaEmocional> list() {
         return meR.findAll();
+    }
+
+    @Override
+    public MetaEmocional insert(MetaEmocional metaEmocional) {
+        return meR.save(metaEmocional);
+    }
+
+    @Override
+    public void update(MetaEmocional metaEmocional) {
+        meR.save(metaEmocional);
+
+    }
+
+    @Override
+    public void delete(int id) {
+        meR.deleteById(id);
+
+    }
+
+    @Override
+    public Optional<MetaEmocional> listId(int id) {
+        return meR.findById(id);
     }
 }

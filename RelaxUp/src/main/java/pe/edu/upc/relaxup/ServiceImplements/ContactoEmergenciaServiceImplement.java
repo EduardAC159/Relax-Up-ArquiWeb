@@ -7,6 +7,7 @@ import pe.edu.upc.relaxup.Repositories.IContactoEmergenciaRepository;
 import pe.edu.upc.relaxup.ServiceInterfaces.IContactoEmergenciaService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactoEmergenciaServiceImplement implements IContactoEmergenciaService {
@@ -17,5 +18,27 @@ public class ContactoEmergenciaServiceImplement implements IContactoEmergenciaSe
     @Override
     public List<ContactoEmergencia> list() {
         return ceR.findAll();
+    }
+
+    @Override
+    public ContactoEmergencia insert(ContactoEmergencia contactoEmergencia) {
+        return ceR.save(contactoEmergencia);
+    }
+
+    @Override
+    public void update(ContactoEmergencia contactoEmergencia) {
+        ceR.save(contactoEmergencia);
+
+    }
+
+    @Override
+    public void delete(int id) {
+        ceR.deleteById(id);
+
+    }
+
+    @Override
+    public Optional<ContactoEmergencia> listId(int id) {
+        return ceR.findById(id);
     }
 }
