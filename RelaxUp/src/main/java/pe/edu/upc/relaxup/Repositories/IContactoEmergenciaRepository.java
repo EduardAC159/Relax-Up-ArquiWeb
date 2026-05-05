@@ -6,4 +6,5 @@ import pe.edu.upc.relaxup.Entities.ContactoEmergencia;
 
 @Repository
 public interface    IContactoEmergenciaRepository extends JpaRepository<ContactoEmergencia,Integer> {
+
 }

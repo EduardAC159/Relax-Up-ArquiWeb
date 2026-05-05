@@ -72,4 +72,33 @@ public class UsuarioController {
                     .body("machine no encontrado");
         }
     }
+    // 📧 BUSCAR POR EMAIL
+    @GetMapping("/buscar-email")
+    public ResponseEntity<?> buscarPorEmail(@RequestParam String email) {
+        Usuario usuario = uS.findByEmail(email);
+
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Usuario con email " + email + " no encontrado");
+        }
+
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO dto = m.map(usuario, UsuarioDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
+    // 📱 BUSCAR POR CELULAR
+    @GetMapping("/buscar-celular")
+    public ResponseEntity<?> buscarPorCelular(@RequestParam int celular) {
+        Usuario usuario = uS.findByCelular(celular);
+
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Usuario con celular " + celular + " no encontrado");
+        }
+
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO dto = m.map(usuario, UsuarioDTO.class);
+        return ResponseEntity.ok(dto);
+    }
 }

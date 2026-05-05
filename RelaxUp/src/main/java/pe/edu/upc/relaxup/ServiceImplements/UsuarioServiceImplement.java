@@ -38,4 +38,22 @@ public class UsuarioServiceImplement implements IUsuarioService {
         return uR.findById(id);
     }
 
+    @Override
+    public Usuario login(String username, String password) {
+        return null;
+    }
+
+    @Override
+    public Usuario findByUsername(String username) {
+        return null;
+    }
+    @Override
+    public Usuario findByEmail(String email) {
+        return uR.findByEmail(email);
+    }
+
+    @Override
+    public Usuario findByCelular(int celular) {
+        return null;
+    }
 }

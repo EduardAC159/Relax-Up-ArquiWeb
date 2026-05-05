@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Relax-Up-ArquiWeb.iml" filepath="$PROJECT_DIR$/.idea/Relax-Up-ArquiWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RelaxUp/RelaxUp.iml" filepath="$PROJECT_DIR$/RelaxUp/RelaxUp.iml" />
     </modules>
   </component>
 </project>
