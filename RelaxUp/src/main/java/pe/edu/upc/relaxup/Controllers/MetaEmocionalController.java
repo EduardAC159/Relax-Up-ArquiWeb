@@ -33,6 +33,7 @@ public class MetaEmocionalController {
     }
 
     @GetMapping("/CantidadMetaEmocionalUsuario")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> CantidadMetaEmocionalUsuario() {
         List<Object[]> listaCantidad = meS.CantidadMetaEmocionalUsuario();
         if (listaCantidad.isEmpty()) {
@@ -49,6 +50,7 @@ public class MetaEmocionalController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody MetaEmocionalDTO dto){
         ModelMapper m = new ModelMapper();
         MetaEmocional e = m.map(dto, MetaEmocional.class);
@@ -59,6 +61,7 @@ public class MetaEmocionalController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody MetaEmocionalDTO dto) {
 
         Optional<MetaEmocional> existente = meS.listId(dto.getIdMeta());

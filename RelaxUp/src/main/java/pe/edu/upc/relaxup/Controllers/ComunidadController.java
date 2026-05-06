@@ -30,6 +30,7 @@ public class ComunidadController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody ComunidadDTO dto){
         ModelMapper m = new ModelMapper();
         Comunidad c = m.map(dto, Comunidad.class);
@@ -40,6 +41,7 @@ public class ComunidadController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody ComunidadDTO dto) {
 
         Optional<Comunidad> existente = cS.listId(dto.getIdComunidad());
@@ -57,6 +59,7 @@ public class ComunidadController {
         return ResponseEntity.ok("Comunidad actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Comunidad> comunidad = cS.listId(id);
 

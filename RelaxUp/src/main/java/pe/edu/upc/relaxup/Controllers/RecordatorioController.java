@@ -37,6 +37,7 @@ public class RecordatorioController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody RecordatorioDTO dto){
         ModelMapper m = new ModelMapper();
         Recordatorio r = m.map(dto, Recordatorio.class);
@@ -47,6 +48,7 @@ public class RecordatorioController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody RecordatorioDTO dto) {
 
         Optional<Recordatorio> existente = reS.listId(dto.getIdRecordatorio());
@@ -66,6 +68,7 @@ public class RecordatorioController {
         return ResponseEntity.ok("Recodatorio actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Recordatorio> reco = reS.listId(id);
 

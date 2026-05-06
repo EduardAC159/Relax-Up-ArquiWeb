@@ -38,6 +38,7 @@ public class InteraccionController {
         return ResponseEntity.ok(ListarInteraccion);
     }
     @GetMapping("/CantidadInteraccionesUsuario")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> CantidadInteraccionesUsuario() {
         List<Object[]> listaCantidad = iS.CantidadInteraccionesUsuario();
         if (listaCantidad.isEmpty()) {
@@ -56,6 +57,7 @@ public class InteraccionController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody InteraccionDTO dto){
         ModelMapper m = new ModelMapper();
         Interaccion i = m.map(dto, Interaccion.class);
@@ -66,6 +68,7 @@ public class InteraccionController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody InteraccionDTO dto) {
 
         Optional<Interaccion> existente = iS.listId(dto.getIdInteraccion());
@@ -84,6 +87,7 @@ public class InteraccionController {
         return ResponseEntity.ok("interaccion actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Interaccion> interaccion = iS.listId(id);
 

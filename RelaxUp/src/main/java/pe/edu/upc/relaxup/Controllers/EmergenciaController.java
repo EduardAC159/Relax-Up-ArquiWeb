@@ -29,6 +29,7 @@ public class EmergenciaController {
         return ResponseEntity.ok(ListarEmergencia);
     }
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody EmergenciaDTO dto){
         ModelMapper m = new ModelMapper();
         Emergencia e = m.map(dto, Emergencia.class);
@@ -39,6 +40,7 @@ public class EmergenciaController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody EmergenciaDTO dto) {
 
         Optional<Emergencia> existente = eS.listId(dto.getIdEmergencia());
@@ -58,6 +60,7 @@ public class EmergenciaController {
         return ResponseEntity.ok("interaccion actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Emergencia> emergencia = eS.listId(id);
 

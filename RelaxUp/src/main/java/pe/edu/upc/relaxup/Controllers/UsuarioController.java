@@ -31,6 +31,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody UsuarioDTO dto){
         ModelMapper m = new ModelMapper();
         Usuario u = m.map(dto, Usuario.class);
@@ -41,6 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody UsuarioDTO dto) {
 
         Optional<Usuario> existente = uS.listId(dto.getIdUsuario());
@@ -63,6 +65,7 @@ public class UsuarioController {
         return ResponseEntity.ok("usuario actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Usuario> usuario = uS.listId(id);
 

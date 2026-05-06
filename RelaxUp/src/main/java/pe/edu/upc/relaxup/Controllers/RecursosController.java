@@ -36,6 +36,7 @@ public class RecursosController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody RecursosDTO dto){
         ModelMapper m = new ModelMapper();
         Recursos r = m.map(dto, Recursos.class);
@@ -46,6 +47,7 @@ public class RecursosController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody RecursosDTO dto) {
 
         Optional<Recursos> existente = recS.listId(dto.getIdRecursos());
@@ -65,6 +67,7 @@ public class RecursosController {
         return ResponseEntity.ok("Recursos actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Recursos> rec = recS.listId(id);
 

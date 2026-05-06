@@ -30,6 +30,7 @@ public class ProgresoController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody ProgresoDTO dto){
         ModelMapper m = new ModelMapper();
         Progreso p = m.map(dto, Progreso.class);
@@ -40,6 +41,7 @@ public class ProgresoController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody ProgresoDTO dto) {
 
         Optional<Progreso> existente = pS.listId(dto.getIdProgreso());
