@@ -37,5 +37,4 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public Optional<Usuario> listId(int id) {
         return uR.findById(id);
     }
-
 }

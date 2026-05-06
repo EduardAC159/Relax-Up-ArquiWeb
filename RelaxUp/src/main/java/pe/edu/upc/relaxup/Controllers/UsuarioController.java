@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.relaxup.Dtos.UserDTO;
 import pe.edu.upc.relaxup.Dtos.UsuarioDTO;
@@ -21,6 +22,7 @@ public class UsuarioController {
     private IUsuarioService uS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?>Listar(){
         ModelMapper m = new ModelMapper();
         List<UserDTO> ListarUsuarios = uS.list().stream()
@@ -29,6 +31,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/nuevo")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody UsuarioDTO dto){
         ModelMapper m = new ModelMapper();
         Usuario u = m.map(dto, Usuario.class);
@@ -39,6 +42,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/actualiza")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> actualizar(@RequestBody UsuarioDTO dto) {
 
         Optional<Usuario> existente = uS.listId(dto.getIdUsuario());
@@ -61,6 +65,7 @@ public class UsuarioController {
         return ResponseEntity.ok("usuario actualizado correctamente");
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Usuario> usuario = uS.listId(id);
 

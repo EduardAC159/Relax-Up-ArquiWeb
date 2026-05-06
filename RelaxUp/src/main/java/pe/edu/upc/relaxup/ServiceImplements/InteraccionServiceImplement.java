@@ -7,6 +7,7 @@ import pe.edu.upc.relaxup.Repositories.IInteraccionRepository;
 import pe.edu.upc.relaxup.ServiceInterfaces.IInteraccionService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InteraccionServiceImplement implements IInteraccionService {
@@ -17,5 +18,32 @@ public class InteraccionServiceImplement implements IInteraccionService {
     @Override
     public List<Interaccion> list() {
         return iR.findAll();
+    }
+
+    @Override
+    public List<Object[]> CantidadInteraccionesUsuario() {
+        return iR.CantidadInteraccionesUsuario();
+    }
+
+    @Override
+    public Interaccion insert(Interaccion interaccion) {
+        return iR.save(interaccion);
+    }
+
+    @Override
+    public void update(Interaccion interaccion) {
+        iR.save(interaccion);
+
+    }
+
+    @Override
+    public void delete(int id) {
+        iR.deleteById(id);
+
+    }
+
+    @Override
+    public Optional<Interaccion> listId(int id) {
+        return iR.findById(id);
     }
 }

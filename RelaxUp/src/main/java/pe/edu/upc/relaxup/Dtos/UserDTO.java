@@ -1,49 +1,22 @@
 package pe.edu.upc.relaxup.Dtos;
 
 public class UserDTO {
-    private int idUsuario;
-    private String Nombres;
-    private String Email;
-    private String Direccion;
-    private int Celular;
+    private String username;
+    private String password;
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getNombres() {
-        return Nombres;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNombres(String nombres) {
-        Nombres = nombres;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public String getDireccion() {
-        return Direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        Direccion = direccion;
-    }
-
-    public int getCelular() {
-        return Celular;
-    }
-
-    public void setCelular(int celular) {
-        Celular = celular;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
