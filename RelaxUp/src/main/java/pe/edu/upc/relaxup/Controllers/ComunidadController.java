@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.relaxup.Dtos.ComunidadDTO;
+import pe.edu.upc.relaxup.Dtos.QuantityPromedioDTO;
+import pe.edu.upc.relaxup.Dtos.QueryComunidadDTO;
 import pe.edu.upc.relaxup.Entities.Comunidad;
 import pe.edu.upc.relaxup.ServiceInterfaces.IComunidadService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,5 +73,23 @@ public class ComunidadController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("machine no encontrado");
         }
+    }
+
+    @GetMapping("/PromedioControlIraMetaEmocional")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarComunidadesOrdenadasPorNombre() {
+        List<Object[]> listaPromedio = cS.buscarComunidadesOrdenadasPorNombre();
+        if (listaPromedio.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay progreso");
+        }
+        List<QueryComunidadDTO> respuesta = new ArrayList<>();
+        for (Object[] fila : listaPromedio) {
+            QueryComunidadDTO dto = new QueryComunidadDTO();
+            dto.setId_comunidad(((Number) fila[0]).intValue());
+            dto.setNombre(((String) fila[1]));
+            dto.setDescripcion(((String) fila[2]));
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
     }
 }

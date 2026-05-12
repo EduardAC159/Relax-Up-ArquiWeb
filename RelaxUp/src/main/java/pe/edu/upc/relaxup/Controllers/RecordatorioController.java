@@ -2,15 +2,20 @@ package pe.edu.upc.relaxup.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.relaxup.Dtos.QuantityPromedioDTO;
+import pe.edu.upc.relaxup.Dtos.QueryRecordatorioDTO;
 import pe.edu.upc.relaxup.Dtos.RecordatorioDTO;
 
 import pe.edu.upc.relaxup.Entities.Recordatorio;
 import pe.edu.upc.relaxup.ServiceInterfaces.IRecordatorioService;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -79,5 +84,40 @@ public class RecordatorioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("machine no encontrado");
         }
+    }
+    @GetMapping("/contarPorTipo")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> contarPorTipo() {
+        List<Object[]> listaPromedio = reS.contarPorTipo();
+        if (listaPromedio.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay progreso");
+        }
+        List<QueryRecordatorioDTO> respuesta = new ArrayList<>();
+        for (Object[] fila : listaPromedio) {
+            QueryRecordatorioDTO dto = new QueryRecordatorioDTO();
+            dto.setTipo(((String) fila[0]));
+            dto.setQuantity(((Number) fila[1]).intValue());
+            respuesta.add(dto);
+
+        }
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/buscarRecordatorios")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarRecordatorios(
+            @RequestParam String tipo,
+            @RequestParam Integer usuarioId,
+            @RequestParam String estado,
+            @RequestParam LocalDateTime fechaInicio,
+            @RequestParam LocalDateTime fechaFin) {
+
+        List<Recordatorio> recordatorios = reS.buscarRecordatorios(
+                tipo, usuarioId, estado, fechaInicio, fechaFin);
+
+        if (recordatorios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron recordatorios con los filtros especificados");
+        }
+        return ResponseEntity.ok(recordatorios);
     }
 }

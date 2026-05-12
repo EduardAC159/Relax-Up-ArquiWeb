@@ -1,5 +1,6 @@
 package pe.edu.upc.relaxup.ServiceInterfaces;
 
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.relaxup.Entities.Recursos;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface IRecursosService {
     public void update(Recursos recursos);
     public void delete(int id);
     public Optional<Recursos> listId(int id);
+    int countRecursosByUsuario(int idUsuario);
 }

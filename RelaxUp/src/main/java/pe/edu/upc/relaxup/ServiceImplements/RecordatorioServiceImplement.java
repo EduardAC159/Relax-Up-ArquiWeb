@@ -7,6 +7,7 @@ import pe.edu.upc.relaxup.Repositories.IComunidadRepository;
 import pe.edu.upc.relaxup.Repositories.IRecordatorioRepository;
 import pe.edu.upc.relaxup.ServiceInterfaces.IRecordatorioService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,5 +40,15 @@ public class RecordatorioServiceImplement implements IRecordatorioService {
     @Override
     public Optional<Recordatorio> listId(int id) {
         return reR.findById(id);
+    }
+
+    @Override
+    public List<Object[]> contarPorTipo() {
+        return reR.contarPorTipo();
+    }
+
+    @Override
+    public List<Recordatorio> buscarRecordatorios(String tipo, Integer usuarioId, String estado, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return reR.buscarRecordatorios(tipo, usuarioId, estado, fechaInicio, fechaFin);
     }
 }

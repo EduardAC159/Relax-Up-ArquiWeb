@@ -11,4 +11,6 @@ public interface IProgresoService {
     public void update(Progreso progreso);
     public void delete(int id);
     public Optional<Progreso> listId(int id);
+    List<Object[]> CantidadNivelControlIra();
+    List<Object[]>  PromedioControlIraMetaEmocional();
 }

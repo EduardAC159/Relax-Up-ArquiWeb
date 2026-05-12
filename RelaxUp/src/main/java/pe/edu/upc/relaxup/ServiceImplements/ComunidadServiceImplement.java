@@ -39,4 +39,9 @@ public class ComunidadServiceImplement implements IComunidadService {
     public Optional<Comunidad> listId(int id) {
         return cR.findById(id);
     }
+
+    @Override
+    public List<Object[]> buscarComunidadesOrdenadasPorNombre() {
+        return cR.buscarComunidadesOrdenadasPorNombre();
+    }
 }

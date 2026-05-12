@@ -11,4 +11,5 @@ public interface IComunidadService {
     public void update(Comunidad comunidad);
     public void delete(int id);
     public Optional<Comunidad> listId(int id);
+    List<Object[]> buscarComunidadesOrdenadasPorNombre();
 }

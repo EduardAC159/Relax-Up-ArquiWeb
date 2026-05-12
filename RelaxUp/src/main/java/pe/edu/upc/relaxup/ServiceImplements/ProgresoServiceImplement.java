@@ -39,4 +39,14 @@ public class ProgresoServiceImplement implements IProgresoService {
         return pR.findById(id);
 
     }
+
+    @Override
+    public List<Object[]> CantidadNivelControlIra() {
+        return pR.CantidadNivelControlIra();
+    }
+
+    @Override
+    public List<Object[]> PromedioControlIraMetaEmocional() {
+        return pR.PromedioControlIraMetaEmocional();
+    }
 }

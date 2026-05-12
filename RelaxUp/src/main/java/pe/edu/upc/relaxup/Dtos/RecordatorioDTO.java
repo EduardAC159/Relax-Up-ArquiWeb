@@ -8,6 +8,15 @@ public class RecordatorioDTO {
     private LocalDateTime fechaHora;
     private String tipo;
     private int idUsuario;
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public int getIdRecordatorio() {
         return idRecordatorio;

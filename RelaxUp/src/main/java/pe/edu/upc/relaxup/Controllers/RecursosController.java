@@ -79,4 +79,11 @@ public class RecursosController {
                     .body("machine no encontrado");
         }
     }
+    @GetMapping("/cantidad/{idUsuario}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Integer> obtenerCantidadPorUsuario(@PathVariable int idUsuario) {
+        int cantidad = recS.countRecursosByUsuario(idUsuario);
+
+        return ResponseEntity.ok(cantidad);
+    }
 }

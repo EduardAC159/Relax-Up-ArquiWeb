@@ -21,6 +21,9 @@ public class Recordatorio {
     @Column(name = "tipo",nullable = false,length = 30)
     private String tipo;
 
+    @Column(name = "estado",nullable = false,length = 30)
+    private String estado;
+
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
@@ -28,12 +31,21 @@ public class Recordatorio {
     public Recordatorio() {
     }
 
-    public Recordatorio(Usuario usuario, String tipo, LocalDateTime fechaHora, String mensaje, int idRecordatorio) {
-        this.usuario = usuario;
-        this.tipo = tipo;
-        this.fechaHora = fechaHora;
-        this.mensaje = mensaje;
+    public Recordatorio(int idRecordatorio, String mensaje, LocalDateTime fechaHora, String tipo, String estado, Usuario usuario) {
         this.idRecordatorio = idRecordatorio;
+        this.mensaje = mensaje;
+        this.fechaHora = fechaHora;
+        this.tipo = tipo;
+        this.estado = estado;
+        this.usuario = usuario;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getIdRecordatorio() {

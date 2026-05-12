@@ -41,4 +41,9 @@ public class RecursosServiceImplement implements IRecursosService {
     public Optional<Recursos> listId(int id) {
         return recR.findById(id);
     }
+
+    @Override
+    public int countRecursosByUsuario(int idUsuario) {
+        return recR.countRecursosByUsuario(idUsuario);
+    }
 }
