@@ -8,7 +8,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.relaxup.Dtos.RecursosDTO;
 import pe.edu.upc.relaxup.Entities.Recursos;
+import pe.edu.upc.relaxup.Entities.Usuario;
 import pe.edu.upc.relaxup.ServiceInterfaces.IRecursosService;
+import pe.edu.upc.relaxup.ServiceInterfaces.IUsuarioService;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,8 @@ public class RecursosController {
 
     @Autowired
     private IRecursosService recS;
+    @Autowired
+    private IUsuarioService uS;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -39,11 +43,19 @@ public class RecursosController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody RecursosDTO dto){
         ModelMapper m = new ModelMapper();
-        Recursos r = m.map(dto, Recursos.class);
+        Optional<Usuario> user = uS.listId(dto.getIdUsuario());
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El curso no existe");
+        }
+        Recursos recursos = m.map(dto, Recursos.class);
+        recursos.setUsuario(user.get());
 
-        Recursos rec = recS.insert(r);
+        Recursos rec = recS.insert(recursos);
         RecursosDTO responseDTO = m.map(rec, RecursosDTO.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(responseDTO);
     }
 
     @PutMapping("/actualiza")

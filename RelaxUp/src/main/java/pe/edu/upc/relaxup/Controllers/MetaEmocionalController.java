@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.relaxup.Dtos.MetaEmocionalDTO;
 import pe.edu.upc.relaxup.Dtos.QuantityMetaEmocionalDTO;
 import pe.edu.upc.relaxup.Entities.MetaEmocional;
+import pe.edu.upc.relaxup.Entities.Usuario;
 import pe.edu.upc.relaxup.ServiceInterfaces.IMetaEmocionalService;
+import pe.edu.upc.relaxup.ServiceInterfaces.IUsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ public class MetaEmocionalController {
 
     @Autowired
     private IMetaEmocionalService meS;
+    @Autowired
+    private IUsuarioService uS;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -53,11 +57,19 @@ public class MetaEmocionalController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody MetaEmocionalDTO dto){
         ModelMapper m = new ModelMapper();
-        MetaEmocional e = m.map(dto, MetaEmocional.class);
+        Optional<Usuario> user = uS.listId(dto.getIdUsuario());
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El curso no existe");
+        }
+        MetaEmocional me = m.map(dto, MetaEmocional.class);
+        me.setUsuario(user.get());
 
-        MetaEmocional met = meS.insert(e);
-        MetaEmocional metaEmocional = m.map(met, MetaEmocional.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(metaEmocional);
+        MetaEmocional meta = meS.insert(me);
+        MetaEmocionalDTO responseDTO = m.map(meta, MetaEmocionalDTO.class);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(responseDTO);
     }
 
     @PutMapping("/actualiza")

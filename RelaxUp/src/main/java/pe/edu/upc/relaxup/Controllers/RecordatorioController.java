@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.relaxup.Dtos.RecordatorioDTO;
 
 import pe.edu.upc.relaxup.Entities.Recordatorio;
+import pe.edu.upc.relaxup.Entities.Usuario;
 import pe.edu.upc.relaxup.ServiceInterfaces.IRecordatorioService;
+import pe.edu.upc.relaxup.ServiceInterfaces.IUsuarioService;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,8 @@ public class RecordatorioController {
 
     @Autowired
     private IRecordatorioService reS;
+    @Autowired
+    private IUsuarioService uS;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -40,11 +44,19 @@ public class RecordatorioController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody RecordatorioDTO dto){
         ModelMapper m = new ModelMapper();
-        Recordatorio r = m.map(dto, Recordatorio.class);
+        Optional<Usuario> user = uS.listId(dto.getIdUsuario());
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El curso no existe");
+        }
+        Recordatorio re = m.map(dto, Recordatorio.class);
+        re.setUsuario(user.get());
 
-        Recordatorio reco = reS.insert(r);
-        RecordatorioDTO recordatorioDTO = m.map(reco, RecordatorioDTO.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(recordatorioDTO);
+        Recordatorio recor = reS.insert(re);
+        RecordatorioDTO responseDTO = m.map(recor, RecordatorioDTO.class);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(responseDTO);
     }
 
     @PutMapping("/actualiza")
