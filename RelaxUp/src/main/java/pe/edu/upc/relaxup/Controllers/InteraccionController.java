@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.relaxup.Dtos.InteraccionDTO;
 import pe.edu.upc.relaxup.Dtos.QuantityInteraccionesDTO;
 import pe.edu.upc.relaxup.Dtos.QuantityMetaEmocionalDTO;
+import pe.edu.upc.relaxup.Entities.Comunidad;
 import pe.edu.upc.relaxup.Entities.Interaccion;
+import pe.edu.upc.relaxup.Entities.Usuario;
+import pe.edu.upc.relaxup.ServiceInterfaces.IComunidadService;
 import pe.edu.upc.relaxup.ServiceInterfaces.IInteraccionService;
+import pe.edu.upc.relaxup.ServiceInterfaces.IUsuarioService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,10 @@ public class InteraccionController {
 
     @Autowired
     private IInteraccionService iS;
+    @Autowired
+    private IUsuarioService uS;
+    @Autowired
+    private IComunidadService cS;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -60,6 +68,16 @@ public class InteraccionController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody InteraccionDTO dto){
         ModelMapper m = new ModelMapper();
+        Optional<Usuario> user = uS.listId(dto.getIdUsuario());
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El curso no existe");
+        }
+        Optional<Comunidad> comu = cS.listId(dto.getIdComunidad());
+        if (comu.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("La comunidad no existe");
+        }
         Interaccion i = m.map(dto, Interaccion.class);
 
         Interaccion inte = iS.insert(i);
