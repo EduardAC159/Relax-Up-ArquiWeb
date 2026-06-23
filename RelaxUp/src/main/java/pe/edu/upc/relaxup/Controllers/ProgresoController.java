@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Progreso")
+@RequestMapping("/api/Progreso")
 public class ProgresoController {
     @Autowired
     private IProgresoService pS;

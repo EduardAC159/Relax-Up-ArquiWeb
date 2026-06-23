@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Emergencias")
+@RequestMapping("/api/Emergencias")
 public class EmergenciaController {
     @Autowired
     private IEmergenciaServicio eS;

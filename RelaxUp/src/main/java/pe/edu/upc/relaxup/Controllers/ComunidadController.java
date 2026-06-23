@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Comunidad")
+@RequestMapping("/api/Comunidad")
 public class ComunidadController {
     @Autowired
     private IComunidadService cS;

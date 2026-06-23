@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Usuario")
+@RequestMapping("/api/Usuario")
 public class UsuarioController {
     @Autowired
     private IUsuarioService uS;
