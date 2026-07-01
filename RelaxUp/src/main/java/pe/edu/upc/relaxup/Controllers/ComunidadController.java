@@ -20,7 +20,7 @@ public class ComunidadController {
     @Autowired
     private IComunidadService cS;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<ComunidadDTO>> Listar(){
         ModelMapper m = new ModelMapper();

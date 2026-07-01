@@ -13,10 +13,10 @@ export class Comunidadservice {
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Comunidad[]>(`${this.url}/Listar`);
+    return this.http.get<Comunidad[]>(`${this.url}/listar`);
   }
   insert(c: Comunidad) {
-    return this.http.post(`${this.url}/registrar`, c);
+    return this.http.post(`${this.url}/nuevo`, c);
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });

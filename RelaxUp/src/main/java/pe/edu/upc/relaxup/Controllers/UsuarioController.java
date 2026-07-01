@@ -21,7 +21,7 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService uS;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?>Listar(){
         ModelMapper m = new ModelMapper();
@@ -56,10 +56,7 @@ public class UsuarioController {
         usu.setNombres(dto.getNombres());
         usu.setEmail(dto.getEmail());
         usu.setDireccion(dto.getDireccion());
-        usu.setUsuario(dto.getUsuario());
         usu.setCelular(dto.getCelular());
-        usu.setContraseña(dto.getContraseña());
-
         uS.update(usu);
 
         return ResponseEntity.ok("usuario actualizado correctamente");

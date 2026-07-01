@@ -1,20 +1,57 @@
 <div class="container">
+  <mat-toolbar class="custom-toolbar">
+    <button
+      matButton
+      class="btn-rojo"
+      aria-label="Example icon-button with menu icon"
+      routerLink="/homes"
+    >
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+      Home
+    </button>
 
- <mat-toolbar class="custom-toolbar">
-  <button
-   matButton
-   class="btn-rojo"
-   aria-label="Example icon-button with menu icon"
-   [matMenuTriggerFor]="menuComunidad"
-  >
-  <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
-  Curso
-  </button>
- </mat-toolbar>
+     <button
+      matButton
+      class="btn-rojo"
+      aria-label="Example icon-button with menu icon"
+      [matMenuTriggerFor]="menuComunidad"
+    >
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+      Comunidad
+    </button>
 
- <mat-menu #menuComunidad="matMenu">
-  <button mat-menu-item routerLink="/comunidad/news"><mat-icon>add</mat-icon>Registrar</button>
-  <button mat-menu-item routerLink="/comunidad/lista"><mat-icon>list</mat-icon>Lista</button>
- </mat-menu>
+    <button
+      matButton
+      class="btn-rojo"
+      aria-label="Example icon-button with menu icon"
+      [matMenuTriggerFor]="menuUsuario"
+    >
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+      Usuarios
+    </button>
+    <button
+      matButton
+      class="btn-rojo"
+      aria-label="Example icon-button with menu icon"
+      [matMenuTriggerFor]="menuEmergencia"
+    >
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+      Emergencia
+    </button>
+  </mat-toolbar>
 
+  <mat-menu #menuComunidad="matMenu">
+    <button mat-menu-item routerLink="/comunidad/news"><mat-icon>add</mat-icon>Registrar</button>
+    <button mat-menu-item routerLink="/comunidad/lista"><mat-icon>list</mat-icon>Lista</button>
+  </mat-menu>
+
+  <mat-menu #menuUsuario="matMenu">
+    <button mat-menu-item routerLink="/usuario/news"><mat-icon>add</mat-icon>Registrar</button>
+    <button mat-menu-item routerLink="/usuario/lista"><mat-icon>list</mat-icon>Lista</button>
+  </mat-menu>
+
+  <mat-menu #menuEmergencia="matMenu">
+    <button mat-menu-item routerLink="/emergencia/news"><mat-icon>add</mat-icon>Registrar</button>
+    <button mat-menu-item routerLink="/emergencia/lista"><mat-icon>list</mat-icon>Lista</button>
+  </mat-menu>
 </div>

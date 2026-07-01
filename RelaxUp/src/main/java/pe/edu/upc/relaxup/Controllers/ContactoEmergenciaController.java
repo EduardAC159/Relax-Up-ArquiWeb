@@ -25,7 +25,7 @@ public class ContactoEmergenciaController {
     @Autowired
     private IUsuarioService uS;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();

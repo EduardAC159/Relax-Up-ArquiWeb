@@ -20,7 +20,7 @@ public class EmergenciaController {
     @Autowired
     private IEmergenciaServicio eS;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<EmergenciaDTO>> Listar(){
         ModelMapper m = new ModelMapper();
