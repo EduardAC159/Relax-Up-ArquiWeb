@@ -7,8 +7,6 @@ public class UsuarioDTO {
     private String Nombres;
     private String Email;
     private String Direccion;
-    private String Usuario;
-    private String Contraseña;
     private int Celular;
 
     public int getIdUsuario() {
@@ -41,22 +39,6 @@ public class UsuarioDTO {
 
     public void setDireccion(String direccion) {
         Direccion = direccion;
-    }
-
-    public String getUsuario() {
-        return Usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        Usuario = usuario;
-    }
-
-    public String getContraseña() {
-        return Contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        Contraseña = contraseña;
     }
 
     public int getCelular() {

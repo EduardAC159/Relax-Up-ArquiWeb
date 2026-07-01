@@ -19,25 +19,17 @@ public class Usuario
     @Column(name = "direccion",nullable = false,length = 50)
     private String Direccion;
 
-    @Column(name = "usuario",nullable = false,length =50 )
-    private String Usuario;
-
-    @Column(name = "contraseña",nullable = false,length = 50)
-    private String Contraseña;
-
     @Column(name = "celular",nullable = false)
     private int Celular;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombres, String email, String direccion, String usuario, String contraseña, int celular) {
+    public Usuario(int idUsuario, String nombres, String email, String direccion, int celular) {
         this.idUsuario = idUsuario;
         Nombres = nombres;
         Email = email;
         Direccion = direccion;
-        Usuario = usuario;
-        Contraseña = contraseña;
         Celular = celular;
     }
 
@@ -71,22 +63,6 @@ public class Usuario
 
     public void setDireccion(String direccion) {
         Direccion = direccion;
-    }
-
-    public String getUsuario() {
-        return Usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        Usuario = usuario;
-    }
-
-    public String getContraseña() {
-        return Contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        Contraseña = contraseña;
     }
 
     public int getCelular() {
