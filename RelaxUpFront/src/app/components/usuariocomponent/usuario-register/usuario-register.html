@@ -1,0 +1,34 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>Registrar Usuario</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+    
+      <mat-form-field>
+        <mat-label>Nombres del Usuario</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput ty formControlName="correo" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Direccion</mat-label>
+        <input matInput formControlName="direccion" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="celular" />
+      </mat-form-field>
+      <div>
+        <button matButton="elevated">Registrar</button>
+      </div>
+      <br>
+      <div>
+        <button matButton="elevated" routerLink="/homes">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
