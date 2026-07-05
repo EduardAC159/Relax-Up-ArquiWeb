@@ -1,5 +1,5 @@
 <div class="container">
-  <div style="text-align: center; margin: 2%"><h2>Registrar Usuario</h2></div>
+  <div style="text-align: center; margin: 2%"><h2>{{ editMode ? 'Editar Usuario' : 'Registrar Usuario' }}</h2></div>
   <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="aceptar()" class="example-form">
     
@@ -10,20 +10,20 @@
       <br />
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput ty formControlName="correo" />
+        <input matInput formControlName="correo" />
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Direccion</mat-label>
-        <input matInput formControlName="direccions" />
+        <input matInput formControlName="direccion" />
       </mat-form-field>
       <br />
       <mat-form-field>
         <mat-label>Celular</mat-label>
-        <input matInput formControlName="celulars" />
+        <input matInput formControlName="celular" />
       </mat-form-field>
       <div>
-        <button matButton="elevated">Registrar</button>
+        <button matButton="elevated">{{ editMode ? 'Actualizar' : 'Registrar' }}</button>
       </div>
       <br>
       <div>

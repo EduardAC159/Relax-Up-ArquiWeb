@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { Comunidad } from '../../../models/Comunidad';
 import { Comunidadservice } from '../../../services/comunidadservice';
 
-
 @Component({
   selector: 'app-comunidad-list',
-  imports: [MatTableModule,MatIconModule,MatButtonModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule],
   templateUrl: './comunidad-list.html',
   styleUrl: './comunidad-list.css',
 })
 export class ComunidadList implements OnInit {
   dataSource: MatTableDataSource<Comunidad> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4'];
-
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
   constructor(
     private cS: Comunidadservice,
     private router: Router,
@@ -44,5 +42,7 @@ export class ComunidadList implements OnInit {
       });
     });
   }
+  editar(id: number) {
+    this.router.navigate(['/comunidad/editar', id]);
+  }
 }
-

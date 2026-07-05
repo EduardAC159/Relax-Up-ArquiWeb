@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Usuario } from '../../../models/usuario';
 import { Interaccion } from '../../../models/Interaccion';
@@ -14,13 +14,13 @@ import { Comunidadservice } from '../../../services/comunidadservice';
 
 @Component({
   selector: 'app-interaccion-list',
-  imports: [MatTableModule, MatIconModule, CommonModule, RouterLink, MatPaginatorModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, CommonModule, RouterLink, MatPaginatorModule],
   templateUrl: './interaccion-list.html',
   styleUrl: './interaccion-list.css',
 })
 export class InteraccionList implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Interaccion> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c4', 'c5'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
   user: Usuario[] = [];
   comu: Comunidad[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -65,6 +65,10 @@ export class InteraccionList implements OnInit, AfterViewInit {
   }
   getComunidad(id: number): string {
     return this.comu.find((pro) => pro.idComunidad === id)?.nombre || 'Sin proyecto';
+  }
+
+  editar(id: number) {
+    this.router.navigate(['/interaccion/editar', id]);
   }
 
   eliminar(id: number) {

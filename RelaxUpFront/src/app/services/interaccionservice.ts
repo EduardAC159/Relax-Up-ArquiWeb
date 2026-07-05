@@ -9,16 +9,22 @@ const base_url = environment.base;
   providedIn: 'root',
 })
 export class Interaccionservice {
-    private url = `${base_url}/api/Interaccion`;
-          constructor(private http: HttpClient) {}
-        
-          list() {
-            return this.http.get<Interaccion[]>(`${this.url}/listar`);
-          }
-          insert(e: Interaccion) {
-            return this.http.post(`${this.url}/nuevo`, e);
-          }
-          delete(id: number) {
-            return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
-          }
+  private url = `${base_url}/api/Interaccion`;
+  constructor(private http: HttpClient) {}
+
+  list() {
+    return this.http.get<Interaccion[]>(`${this.url}/listar`);
+  }
+  insert(e: Interaccion) {
+    return this.http.post(`${this.url}/nuevo`, e);
+  }
+  update(e: Interaccion) {
+    return this.http.put(`${this.url}/actualiza`, e, { responseType: 'text' });
+  }
+  listId(id: number) {
+    return this.http.get<Interaccion>(`${this.url}/${id}`);
+  }
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
 }

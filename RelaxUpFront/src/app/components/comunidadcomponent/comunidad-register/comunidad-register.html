@@ -1,22 +1,24 @@
 <div class="container">
-  <div style="text-align: center;margin: 3%;"><h2>Registro de Comunidades</h2></div>
-  <div style="text-align: center;margin: 3%;">
+  <div style="text-align: center; margin: 3%">
+    <h2>{{ editMode ? 'Editar Comunidad' : 'Registro de Comunidades' }}</h2>
+  </div>
+  <div style="text-align: center; margin: 3%">
     <form [formGroup]="form" (submit)="aceptar()">
       <mat-form-field class="example-full-width">
         <mat-label>Comunidad</mat-label>
-        <input matInput placeholder="Comunidad" formControlName="comunidad"/>
+        <input matInput placeholder="Comunidad" formControlName="comunidad" />
       </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width">
+      <br />
+      <mat-form-field class="example-full-width">
         <mat-label>Descripcion</mat-label>
-        <input matInput placeholder="Descripcion" formControlName="descripcion"/>
+        <input matInput placeholder="Descripcion" formControlName="descripcion" />
       </mat-form-field>
       <div>
         <button matButton="elevated">Registrar</button>
       </div>
-      <br>
+      <br />
       <div>
-        <button matButton="elevated" routerLink="/homes">Cancelar</button>
+        <button matButton="elevated">{{ editMode ? 'Actualizar' : 'Registrar' }}</button>
       </div>
     </form>
   </div>

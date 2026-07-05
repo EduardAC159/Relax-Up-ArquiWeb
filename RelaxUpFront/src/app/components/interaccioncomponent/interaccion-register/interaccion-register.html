@@ -1,1 +1,49 @@
-<p>interaccion-register works!</p>
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>{{ editMode ? 'Editar Interaccion' : 'Registrar Interaccion' }}</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      <mat-form-field>
+        <mat-label>Mensaje</mat-label>
+        <input matInput formControlName="Mensaje" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="Fecha" />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="IdUsuario">
+          @for (u of usuarios; track u.idUsuario) {
+            <mat-option [value]="u.idUsuario">{{ u.nombres }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Comunidad</mat-label>
+        <mat-select formControlName="IdComunidad">
+          @for (c of comunidades; track c.idComunidad) {
+            <mat-option [value]="c.idComunidad">{{ c.nombre }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button matButton="elevated">{{ editMode ? 'Actualizar' : 'Registrar' }}</button>
+      </div>
+      <br>
+      <div>
+        <button matButton="elevated" routerLink="/homes">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

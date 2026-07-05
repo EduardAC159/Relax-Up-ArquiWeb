@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { Emergencia } from '../../../models/emergencia';
 import { Emergenciaservice } from '../../../services/emergenciaservice';
 
-
 @Component({
   selector: 'app-emergencia-list',
-  imports: [MatTableModule,MatIconModule,MatButtonModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule],
   templateUrl: './emergencia-list.html',
   styleUrl: './emergencia-list.css',
 })
 export class EmergenciaList implements OnInit {
   dataSource: MatTableDataSource<Emergencia> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
-
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   constructor(
     private eS: Emergenciaservice,
     private router: Router,
@@ -44,7 +42,7 @@ export class EmergenciaList implements OnInit {
       });
     });
   }
+  editar(id: number) {
+    this.router.navigate(['/emergencia/editar', id]);
+  }
 }
-
-
-

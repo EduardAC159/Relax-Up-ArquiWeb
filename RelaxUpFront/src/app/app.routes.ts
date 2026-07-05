@@ -14,6 +14,9 @@ import { ContactoEmergenciacomponent } from './components/contacto-emergenciacom
 import { ContactoEmergenciaRegister } from './components/contacto-emergenciacomponent/contacto-emergencia-register/contacto-emergencia-register';
 import { Authenticate } from './components/authenticate/authenticate/authenticate';
 import { seguridadGuard } from './guard/seguridad-guard';
+import { Interaccioncomponent } from './components/interaccioncomponent/interaccioncomponent';
+import { InteraccionList } from './components/interaccioncomponent/interaccion-list/interaccion-list';
+import { InteraccionRegister } from './components/interaccioncomponent/interaccion-register/interaccion-register';
 
 export const routes: Routes = [
   {
@@ -44,6 +47,10 @@ export const routes: Routes = [
         path: 'news',
         component: ComunidadRegister,
       },
+      {
+        path: 'editar/:id',
+        component: ComunidadRegister,
+      },
     ],
   },
   {
@@ -58,6 +65,10 @@ export const routes: Routes = [
       },
       {
         path: 'news',
+        component: UsuarioRegister,
+      },
+      {
+        path: 'editar/:id',
         component: UsuarioRegister,
       },
     ],
@@ -76,6 +87,10 @@ export const routes: Routes = [
         path: 'news',
         component: EmergenciaRegister,
       },
+      {
+        path: 'editar/:id',
+        component: EmergenciaRegister,
+      },
     ],
   },
   {
@@ -91,6 +106,26 @@ export const routes: Routes = [
       {
         path: 'news/:id',
         component: ContactoEmergenciaRegister,
+      },
+    ],
+  },
+  {
+    path: 'interaccion',
+    component: Interaccioncomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      {
+        path: 'lista',
+        component: InteraccionList,
+      },
+      {
+        path: 'news',
+        component: InteraccionRegister,
+      },
+      {
+        path: 'editar/:id',
+        component: InteraccionRegister,
       },
     ],
   },

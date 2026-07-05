@@ -28,6 +28,20 @@ public class EmergenciaController {
                 .map(x->m.map(x,EmergenciaDTO.class)).collect(Collectors.toList());
         return ResponseEntity.ok(ListarEmergencia);
     }
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<Emergencia> emergencia = eS.listId(id);
+
+        if (emergencia.isPresent()) {
+            EmergenciaDTO dto = m.map(emergencia.get(), EmergenciaDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Emergencia no encontrada");
+        }
+    }
     @PostMapping("/nuevo")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody EmergenciaDTO dto){

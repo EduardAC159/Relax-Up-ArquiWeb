@@ -63,7 +63,20 @@ public class InteraccionController {
         }
         return ResponseEntity.ok(respuesta);
     }
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<Interaccion> interaccion = iS.listId(id);
 
+        if (interaccion.isPresent()) {
+            InteraccionDTO dto = m.map(interaccion.get(), InteraccionDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Interaccion no encontrada");
+        }
+    }
     @PostMapping("/nuevo")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody InteraccionDTO dto){

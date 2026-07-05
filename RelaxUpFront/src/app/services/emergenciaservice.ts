@@ -18,6 +18,12 @@ export class Emergenciaservice {
       insert(e: Emergencia) {
         return this.http.post(`${this.url}/nuevo`, e);
       }
+      update(e: Emergencia) {
+        return this.http.put(`${this.url}/actualiza`, e, { responseType: 'text' });
+      }
+      listId(id: number) {
+        return this.http.get<Emergencia>(`${this.url}/${id}`);
+      }
       delete(id: number) {
         return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
       }

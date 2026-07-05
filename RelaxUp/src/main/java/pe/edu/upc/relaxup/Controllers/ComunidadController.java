@@ -58,6 +58,21 @@ public class ComunidadController {
 
         return ResponseEntity.ok("Comunidad actualizado correctamente");
     }
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<Comunidad> comunidad = cS.listId(id);
+
+        if (comunidad.isPresent()) {
+            ComunidadDTO dto = m.map(comunidad.get(), ComunidadDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Comunidad no encontrada");
+        }
+    }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {

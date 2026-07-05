@@ -21,4 +21,10 @@ export class Comunidadservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+  update(c: Comunidad) {
+    return this.http.put(`${this.url}/actualiza`, c, { responseType: 'text' });
+  }
+  listId(id: number) {
+    return this.http.get<Comunidad>(`${this.url}/${id}`);
+  }
 }
