@@ -21,7 +21,7 @@ public class EmergenciaController {
     private IEmergenciaServicio eS;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<List<EmergenciaDTO>> Listar(){
         ModelMapper m = new ModelMapper();
         List<EmergenciaDTO> ListarEmergencia = eS.list().stream()
@@ -29,7 +29,7 @@ public class EmergenciaController {
         return ResponseEntity.ok(ListarEmergencia);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<Emergencia> emergencia = eS.listId(id);
@@ -43,7 +43,7 @@ public class EmergenciaController {
         }
     }
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody EmergenciaDTO dto){
         ModelMapper m = new ModelMapper();
         Emergencia e = m.map(dto, Emergencia.class);
@@ -54,7 +54,7 @@ public class EmergenciaController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody EmergenciaDTO dto) {
 
         Optional<Emergencia> existente = eS.listId(dto.getIdEmergencia());
@@ -74,7 +74,7 @@ public class EmergenciaController {
         return ResponseEntity.ok("interaccion actualizado correctamente");
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Emergencia> emergencia = eS.listId(id);
 

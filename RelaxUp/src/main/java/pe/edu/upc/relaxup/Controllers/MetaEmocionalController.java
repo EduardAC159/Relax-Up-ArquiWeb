@@ -28,7 +28,7 @@ public class MetaEmocionalController {
     private IUsuarioService uS;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
         List<MetaEmocionalDTO> listarMeta = meS.list().stream()
@@ -37,7 +37,7 @@ public class MetaEmocionalController {
     }
 
     @GetMapping("/CantidadMetaEmocionalUsuario")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> CantidadMetaEmocionalUsuario() {
         List<Object[]> listaCantidad = meS.CantidadMetaEmocionalUsuario();
         if (listaCantidad.isEmpty()) {
@@ -53,7 +53,7 @@ public class MetaEmocionalController {
         return ResponseEntity.ok(respuesta);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<MetaEmocional> meta = meS.listId(id);
@@ -68,7 +68,7 @@ public class MetaEmocionalController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<MetaEmocional> meta = meS.listId(id);
 
@@ -82,7 +82,7 @@ public class MetaEmocionalController {
     }
 
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody MetaEmocionalDTO dto){
         ModelMapper m = new ModelMapper();
         Optional<Usuario> user = uS.listId(dto.getIdUsuario());
@@ -101,7 +101,7 @@ public class MetaEmocionalController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody MetaEmocionalDTO dto) {
 
         Optional<MetaEmocional> existente = meS.listId(dto.getIdMeta());

@@ -33,7 +33,7 @@ public class InteraccionController {
     private IComunidadService cS;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
         List<InteraccionDTO> ListarInteraccion = iS.list().stream()
@@ -46,7 +46,7 @@ public class InteraccionController {
         return ResponseEntity.ok(ListarInteraccion);
     }
     @GetMapping("/CantidadInteraccionesUsuario")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> CantidadInteraccionesUsuario() {
         List<Object[]> listaCantidad = iS.CantidadInteraccionesUsuario();
         if (listaCantidad.isEmpty()) {
@@ -64,7 +64,7 @@ public class InteraccionController {
         return ResponseEntity.ok(respuesta);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<Interaccion> interaccion = iS.listId(id);
@@ -78,7 +78,7 @@ public class InteraccionController {
         }
     }
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody InteraccionDTO dto){
         ModelMapper m = new ModelMapper();
         Optional<Usuario> user = uS.listId(dto.getIdUsuario());
@@ -100,7 +100,7 @@ public class InteraccionController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody InteraccionDTO dto) {
 
         Optional<Interaccion> existente = iS.listId(dto.getIdInteraccion());
@@ -119,7 +119,7 @@ public class InteraccionController {
         return ResponseEntity.ok("interaccion actualizado correctamente");
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Interaccion> interaccion = iS.listId(id);
 

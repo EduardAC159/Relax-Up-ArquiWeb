@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -9,7 +9,7 @@ import { JwtRequestDTO } from '../../../models/JwtRequestDTO';
 import { Loginservice } from '../../../services/loginservice';
 @Component({
   selector: 'app-authenticate',
-  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule],
+  imports: [MatFormFieldModule, FormsModule, MatInputModule, MatButtonModule, RouterLink],
   templateUrl: './authenticate.html',
   styleUrl: './authenticate.css',
 })

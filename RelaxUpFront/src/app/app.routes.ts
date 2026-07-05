@@ -29,6 +29,7 @@ import { RecursosRegister } from './components/recursoscomponent/recursos-regist
 import { Progresocomponent } from './components/progresocomponent/progresocomponent';
 import { ProgresoList } from './components/progresocomponent/progreso-list/progreso-list';
 import { ProgresoRegister } from './components/progresocomponent/progreso-register/progreso-register';
+import { Register } from './components/authenticate/register/register';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: Authenticate,
+  },
+  {
+    path: 'registro',
+    component: Register,
   },
   {
     path: 'homes',

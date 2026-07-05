@@ -26,7 +26,7 @@ public class RecursosController {
     private IUsuarioService uS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
         List<RecursosDTO> ListarRecursos = recS.list().stream()
@@ -40,7 +40,7 @@ public class RecursosController {
     }
 
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody RecursosDTO dto){
         ModelMapper m = new ModelMapper();
         Optional<Usuario> user = uS.listId(dto.getIdUsuario());
@@ -59,7 +59,7 @@ public class RecursosController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody RecursosDTO dto) {
 
         Optional<Recursos> existente = recS.listId(dto.getIdRecursos());
@@ -79,7 +79,7 @@ public class RecursosController {
         return ResponseEntity.ok("Recursos actualizado correctamente");
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Recursos> rec = recS.listId(id);
 

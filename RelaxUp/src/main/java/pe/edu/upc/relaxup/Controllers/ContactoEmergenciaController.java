@@ -26,7 +26,7 @@ public class ContactoEmergenciaController {
     private IUsuarioService uS;
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
         List<ContactoEmergenciaDTO> ListarContacto = ceS.list().stream()
@@ -39,7 +39,7 @@ public class ContactoEmergenciaController {
         return ResponseEntity.ok(ListarContacto);
     }
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody ContactoEmergenciaDTO dto){
         ModelMapper m = new ModelMapper();
         Optional<Usuario> user = uS.listId(dto.getIdUsuario());
@@ -57,7 +57,7 @@ public class ContactoEmergenciaController {
                 .body(responseDTO);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<ContactoEmergencia> contacto = ceS.listId(id);
@@ -72,7 +72,7 @@ public class ContactoEmergenciaController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody ContactoEmergenciaDTO dto) {
 
         Optional<ContactoEmergencia> existente = ceS.listId(dto.getIdContacto());
@@ -92,7 +92,7 @@ public class ContactoEmergenciaController {
         return ResponseEntity.ok("Contacto de emergencia actualizado correctamente");
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<ContactoEmergencia> contactoEmergencia = ceS.listId(id);
 
@@ -105,7 +105,7 @@ public class ContactoEmergenciaController {
         }
     }
     @GetMapping("/listar/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> listarPorUsuario(@PathVariable int id) {
 
         ModelMapper m = new ModelMapper();

@@ -21,7 +21,7 @@ public class ProgresoController {
     private IProgresoService pS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<List<ProgresoDTO>> Listar(){
         ModelMapper m = new ModelMapper();
         List<ProgresoDTO> ListarProgreso = pS.list().stream()
@@ -30,7 +30,7 @@ public class ProgresoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
         Optional<Progreso> progreso = pS.listId(id);
@@ -43,9 +43,9 @@ public class ProgresoController {
                     .body("Progreso no encontrado");
         }
     }
-    
+
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody ProgresoDTO dto){
         ModelMapper m = new ModelMapper();
         Progreso p = m.map(dto, Progreso.class);
@@ -56,7 +56,7 @@ public class ProgresoController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody ProgresoDTO dto) {
 
         Optional<Progreso> existente = pS.listId(dto.getIdProgreso());
@@ -76,7 +76,7 @@ public class ProgresoController {
         return ResponseEntity.ok("Recodatorio actualizado correctamente");
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Progreso> existente = pS.listId(id);
 

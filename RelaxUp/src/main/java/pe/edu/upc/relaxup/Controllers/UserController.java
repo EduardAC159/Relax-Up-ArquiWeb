@@ -24,7 +24,11 @@ public class UserController {
         Users u = m.map(dto, Users.class);
 
         Users us = uS.insert(u);
-        UserDTO responseDTO = m.map(us, UserDTO.class);
+
+        // No devolver la contraseña (ni siquiera el hash) al cliente
+        UserDTO responseDTO = new UserDTO();
+        responseDTO.setUsername(us.getUsername());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 }

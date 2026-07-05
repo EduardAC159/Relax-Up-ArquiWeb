@@ -27,7 +27,7 @@ public class RecordatorioController {
     private IUsuarioService uS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
         List<RecordatorioDTO> ListarRecordatorio = reS.list().stream()
@@ -41,7 +41,7 @@ public class RecordatorioController {
     }
 
     @PostMapping("/nuevo")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<?> registrar(@RequestBody RecordatorioDTO dto){
         ModelMapper m = new ModelMapper();
         Optional<Usuario> user = uS.listId(dto.getIdUsuario());
@@ -60,7 +60,7 @@ public class RecordatorioController {
     }
 
     @PutMapping("/actualiza")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> actualizar(@RequestBody RecordatorioDTO dto) {
 
         Optional<Recordatorio> existente = reS.listId(dto.getIdRecordatorio());
@@ -80,7 +80,7 @@ public class RecordatorioController {
         return ResponseEntity.ok("Recodatorio actualizado correctamente");
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public ResponseEntity<String> eliminar(@PathVariable int id) {
         Optional<Recordatorio> reco = reS.listId(id);
 

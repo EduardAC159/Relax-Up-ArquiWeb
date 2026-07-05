@@ -22,6 +22,9 @@ public class Usuario
     @Column(name = "celular",nullable = false)
     private int celular;
 
+    @Column(name = "username", unique = true, length = 30)
+    private String username;
+
     public Usuario() {
     }
 
@@ -33,6 +36,13 @@ public class Usuario
         this.celular = celular;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public int getIdUsuario() {
         return idUsuario;
     }
