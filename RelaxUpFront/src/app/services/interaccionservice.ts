@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Interaccion } from '../models/Interaccion';
+import { QuantityInteracciones } from '../models/QuantityInteracciones';
 
 const base_url = environment.base;
 
@@ -26,5 +27,8 @@ export class Interaccionservice {
   }
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+  cantidadInteraccionesUsuario() {
+    return this.http.get<QuantityInteracciones[]>(`${this.url}/CantidadInteraccionesUsuario`);
   }
 }

@@ -4,6 +4,7 @@
       <button mat-button [routerLink]="['/homes']" class="btn-rojo">
         <mat-icon>home</mat-icon>Home
       </button>
+
       @if (isAdmin()) {
         <button
           matButton
@@ -24,56 +25,68 @@
           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
           Usuarios
         </button>
-        <button
-          matButton
-          class="btn-rojo"
-          aria-label="Example icon-button with menu icon"
-          [matMenuTriggerFor]="menuEmergencia"
-        >
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
-          Emergencia
-        </button>
-        <button
-          matButton
-          class="btn-rojo"
-          aria-label="Example icon-button with menu icon"
-          [matMenuTriggerFor]="menuInteraccion"
-        >
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
-          Interaccion
-        </button>
-        <button
-          matButton
-          class="btn-rojo"
-          aria-label="Example icon-button with menu icon"
-          [matMenuTriggerFor]="menuMetaEmocional"
-        >
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
-          Meta Emocional
-        </button>
-        <button
-          matButton
-          class="btn-rojo"
-          aria-label="Example icon-button with menu icon"
-          [matMenuTriggerFor]="menuRecordatorio"
-        >
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
-          Recordatorio
-        </button>
-        <button
-          matButton
-          class="btn-rojo"
-          aria-label="Example icon-button with menu icon"
-          [matMenuTriggerFor]="menuRecursos"
-        >
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
-          Recursos
-        </button>
-        <button matButton class="btn-rojo" [matMenuTriggerFor]="menuProgreso">
-          <mat-icon aria-hidden="false" fontIcon="list"></mat-icon>
-          Progreso
-        </button>
       }
+
+      <button
+        matButton
+        class="btn-rojo"
+        aria-label="Example icon-button with menu icon"
+        [matMenuTriggerFor]="menuEmergencia"
+      >
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+        Emergencia
+      </button>
+      <button
+        matButton
+        class="btn-rojo"
+        aria-label="Example icon-button with menu icon"
+        [matMenuTriggerFor]="menuInteraccion"
+      >
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+        Interaccion
+      </button>
+      <button
+        matButton
+        class="btn-rojo"
+        aria-label="Example icon-button with menu icon"
+        [matMenuTriggerFor]="menuMetaEmocional"
+      >
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+        Meta Emocional
+      </button>
+      <button
+        matButton
+        class="btn-rojo"
+        aria-label="Example icon-button with menu icon"
+        [matMenuTriggerFor]="menuRecordatorio"
+      >
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+        Recordatorio
+      </button>
+      <button
+        matButton
+        class="btn-rojo"
+        aria-label="Example icon-button with menu icon"
+        [matMenuTriggerFor]="menuRecursos"
+      >
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+        Recursos
+      </button>
+      <button matButton class="btn-rojo" [matMenuTriggerFor]="menuProgreso">
+        <mat-icon aria-hidden="false" fontIcon="list"></mat-icon>
+        Progreso
+      </button>
+
+      <button
+        matButton
+        class="btn-rojo"
+        aria-label="Menu de reportes"
+        [matMenuTriggerFor]="menuReportes"
+      >
+        <mat-icon aria-hidden="false" fontIcon="bar_chart"></mat-icon>
+        Reportes
+      </button>
+
       <span class="spacer"> </span>
 
       <button mat-button [matMenuTriggerFor]="menuSalir"><mat-icon>person</mat-icon>Usuario</button>
@@ -120,6 +133,15 @@
   <mat-menu #menuProgreso="matMenu">
     <button mat-menu-item routerLink="/progreso/news"><mat-icon>add</mat-icon>Registrar</button>
     <button mat-menu-item routerLink="/progreso/lista"><mat-icon>list</mat-icon>Lista</button>
+  </mat-menu>
+
+  <mat-menu #menuReportes="matMenu">
+    <button mat-menu-item routerLink="/interaccion/reporte">
+      <mat-icon>bar_chart</mat-icon>Interacciones por usuario
+    </button>
+    <button mat-menu-item routerLink="/meta-emocional/reporte">
+      <mat-icon>pie_chart</mat-icon>Metas Emocionales
+    </button>
   </mat-menu>
 
   <mat-menu #menuSalir="matMenu">

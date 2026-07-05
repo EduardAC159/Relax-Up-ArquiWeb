@@ -30,6 +30,8 @@ import { Progresocomponent } from './components/progresocomponent/progresocompon
 import { ProgresoList } from './components/progresocomponent/progreso-list/progreso-list';
 import { ProgresoRegister } from './components/progresocomponent/progreso-register/progreso-register';
 import { Register } from './components/authenticate/register/register';
+import { InteraccionReporte } from './components/interaccioncomponent/interaccion-reporte/interaccion-reporte';
+import { MetaEmocionalReporte } from './components/meta-emocionalcomponent/meta-emocional-reporte/meta-emocional-reporte';
 
 export const routes: Routes = [
   {
@@ -150,6 +152,10 @@ export const routes: Routes = [
         path: 'editar/:id',
         component: InteraccionRegister,
       },
+      {
+        path: 'reporte',
+        component: InteraccionReporte,
+      },
     ],
   },
   {
@@ -169,6 +175,10 @@ export const routes: Routes = [
       {
         path: 'editar/:id',
         component: MetaEmocionalRegister,
+      },
+      {
+        path: 'reporte',
+        component: MetaEmocionalReporte,
       },
     ],
   },
