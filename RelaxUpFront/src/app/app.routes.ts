@@ -17,6 +17,9 @@ import { seguridadGuard } from './guard/seguridad-guard';
 import { Interaccioncomponent } from './components/interaccioncomponent/interaccioncomponent';
 import { InteraccionList } from './components/interaccioncomponent/interaccion-list/interaccion-list';
 import { InteraccionRegister } from './components/interaccioncomponent/interaccion-register/interaccion-register';
+import { MetaEmocionalcomponent } from './components/meta-emocionalcomponent/meta-emocionalcomponent';
+import { MetaEmocionalList } from './components/meta-emocionalcomponent/meta-emocional-list/meta-emocional-list';
+import { MetaEmocionalRegister } from './components/meta-emocionalcomponent/meta-emocional-register/meta-emocional-register';
 
 export const routes: Routes = [
   {
@@ -135,4 +138,24 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+  path: 'meta-emocional',
+  component: MetaEmocionalcomponent,
+  canActivate: [seguridadGuard],
+  canActivateChild: [seguridadGuard],
+  children: [
+    {
+      path: 'lista',
+      component: MetaEmocionalList,
+    },
+    {
+      path: 'news',
+      component: MetaEmocionalRegister,
+    },
+    {
+      path: 'editar/:id',
+      component: MetaEmocionalRegister,
+    },
+  ],
+},
 ];

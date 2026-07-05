@@ -42,6 +42,15 @@
           <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
           Interaccion
         </button>
+        <button
+          matButton
+          class="btn-rojo"
+          aria-label="Example icon-button with menu icon"
+          [matMenuTriggerFor]="menuMetaEmocional"
+        >
+          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="list"></mat-icon>
+          Meta Emocional
+        </button>
       }
       <span class="spacer"> </span>
 
@@ -67,6 +76,11 @@
   <mat-menu #menuInteraccion="matMenu">
     <button mat-menu-item routerLink="/interaccion/news"><mat-icon>add</mat-icon>Registrar</button>
     <button mat-menu-item routerLink="/interaccion/lista"><mat-icon>list</mat-icon>Lista</button>
+  </mat-menu>
+
+  <mat-menu #menuMetaEmocional="matMenu">
+    <button mat-menu-item routerLink="/meta-emocional/news"><mat-icon>add</mat-icon>Registrar</button>
+    <button mat-menu-item routerLink="/meta-emocional/lista"><mat-icon>list</mat-icon>Lista</button>
   </mat-menu>
 
   <mat-menu #menuSalir="matMenu">

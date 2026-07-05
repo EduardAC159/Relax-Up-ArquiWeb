@@ -27,7 +27,7 @@ public class MetaEmocionalController {
     @Autowired
     private IUsuarioService uS;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();
@@ -51,6 +51,34 @@ public class MetaEmocionalController {
 
         }
         return ResponseEntity.ok(respuesta);
+    }
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<MetaEmocional> meta = meS.listId(id);
+
+        if (meta.isPresent()) {
+            MetaEmocionalDTO dto = m.map(meta.get(), MetaEmocionalDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Meta emocional no encontrada");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> eliminar(@PathVariable int id) {
+        Optional<MetaEmocional> meta = meS.listId(id);
+
+        if (meta.isPresent()) {
+            meS.delete(id);
+            return ResponseEntity.ok("Meta emocional eliminada correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Meta emocional no encontrada");
+        }
     }
 
     @PostMapping("/nuevo")

@@ -1,0 +1,56 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%"><h2>{{ editMode ? 'Editar Meta Emocional' : 'Registrar Meta Emocional' }}</h2></div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      <mat-form-field>
+        <mat-label>Descripcion</mat-label>
+        <input matInput formControlName="Descripcion" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" formControlName="FechaInicio" />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" formControlName="FechaFin" />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="Estado">
+          @for (e of estados; track e) {
+            <mat-option [value]="e">{{ e }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="IdUsuario">
+          @for (u of usuarios; track u.idUsuario) {
+            <mat-option [value]="u.idUsuario">{{ u.nombres }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button matButton="elevated">{{ editMode ? 'Actualizar' : 'Registrar' }}</button>
+      </div>
+      <br>
+      <div>
+        <button matButton="elevated" routerLink="/homes">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
