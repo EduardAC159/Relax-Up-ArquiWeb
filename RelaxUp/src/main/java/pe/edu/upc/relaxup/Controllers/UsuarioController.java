@@ -77,10 +77,10 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable int id) {
         ModelMapper m = new ModelMapper();
-        Optional<Usuario> curso = uS.listId(id);
+        Optional<Usuario> usuario = uS.listId(id);
 
-        if (curso.isPresent()) {
-            UsuarioDTO dto = m.map(curso.get(), UsuarioDTO.class);
+        if (usuario.isPresent()) {
+            UsuarioDTO dto = m.map(usuario.get(), UsuarioDTO.class);
             return ResponseEntity.ok(dto);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
