@@ -1,48 +1,78 @@
+<!-- usuario-list.html -->
 <div class="container" style="text-align: center">
   <h2 style="margin: 3%">Lista de Usuarios</h2>
   <div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
+      <!-- ID -->
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>No.</th>
         <td mat-cell *matCellDef="let element">{{ element.idUsuario }}</td>
       </ng-container>
 
+      <!-- Nombres -->
       <ng-container matColumnDef="c2">
         <th mat-header-cell *matHeaderCellDef>Nombres</th>
-        <td mat-cell *matCellDef="let element">{{ element.Nombres }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.nombres }}</td>
       </ng-container>
 
+      <!-- Email -->
       <ng-container matColumnDef="c3">
         <th mat-header-cell *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let element">{{ element.Email }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
       </ng-container>
 
+      <!-- Direccion -->
       <ng-container matColumnDef="c4">
-        <th mat-header-cell *matHeaderCellDef>Direccion</th>
-        <td mat-cell *matCellDef="let element">{{ element.Direccion }}</td>
+        <th mat-header-cell *matHeaderCellDef>Dirección</th>
+        <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
       </ng-container>
 
+      <!-- Celular -->
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Celular</th>
-        <td mat-cell *matCellDef="let element">{{ element.Celular }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.celular }}</td>
       </ng-container>
 
+      <!-- usuario-list.html -->
       <ng-container matColumnDef="c6">
         <th mat-header-cell *matHeaderCellDef>Contactos</th>
         <td mat-cell *matCellDef="let element">
-          <button matButton (click)="verContactos(element.idUsuario)" class="btn-eliminar">
-            <mat-icon>contacts</mat-icon>
-          </button>
+          <!-- ✅ Mostrar el ID para depuración -->
+          <div style="display: flex; align-items: center; gap: 8px; justify-content: center">
+            <span
+              style="
+                font-size: 10px;
+                color: #666;
+                background: #f0f0f0;
+                padding: 2px 6px;
+                border-radius: 3px;
+              "
+            >
+              ID: {{ element.idUsuario }}
+            </span>
+            <button
+              mat-button
+              (click)="verContactos(element.idUsuario)"
+              [disabled]="!element.idUsuario || element.idUsuario === 0"
+              class="btn-eliminar"
+              matTooltip="Ver contactos"
+            >
+              <mat-icon>contacts</mat-icon>
+            </button>
+          </div>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button matButton (click)="eliminar(element.idUsuario)" class="btn-eliminar">
+          <button
+            mat-button
+            (click)="eliminar(element.idUsuario)"
+            [disabled]="!element.idUsuario || element.idUsuario === 0"
+            class="btn-eliminar"
+            matTooltip="Eliminar usuario"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>

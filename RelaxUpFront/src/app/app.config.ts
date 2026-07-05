@@ -16,6 +16,7 @@ import {
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { errorInterceptor } from './errors/error-interceptor';
 import { JwtModule } from '@auth0/angular-jwt';
+import { authInterceptor } from './errors/auth-interceptor';
 
 export function tokenGetter() {
   if (typeof window === 'undefined') {
@@ -35,7 +36,7 @@ export const appConfig: ApplicationConfig = {
 
     provideCharts(withDefaultRegisterables()),
 
-    provideHttpClient(withFetch(), withInterceptors([errorInterceptor]), withInterceptorsFromDi()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor, errorInterceptor]), withInterceptorsFromDi()),
 
     importProvidersFrom(
       JwtModule.forRoot({

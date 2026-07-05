@@ -9,7 +9,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ContactoEmergencia } from '../../../models/contacto-emergencia';
-import { Usuario } from '../../../models/usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { ContactoEmergenciaservice } from '../../../services/contacto-emergenciaservice';
 
@@ -49,7 +48,7 @@ export class ContactoEmergenciaRegister implements OnInit {
       this.idUsuario = +params['id'];
 
       this.uS.listId(this.idUsuario).subscribe(data => {
-      this.nombreUsuario = data.Nombres; 
+      this.nombreUsuario = data.nombres; 
     });
     });
 

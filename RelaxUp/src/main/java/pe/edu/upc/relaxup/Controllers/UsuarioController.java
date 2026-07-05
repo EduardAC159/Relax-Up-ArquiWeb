@@ -25,8 +25,8 @@ public class UsuarioController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?>Listar(){
         ModelMapper m = new ModelMapper();
-        List<UserDTO> ListarUsuarios = uS.list().stream()
-                .map(x->m.map(x,UserDTO.class)).collect(Collectors.toList());
+        List<UsuarioDTO> ListarUsuarios = uS.list().stream()
+                .map(x->m.map(x,UsuarioDTO.class)).collect(Collectors.toList());
         return ResponseEntity.ok(ListarUsuarios);
     }
 

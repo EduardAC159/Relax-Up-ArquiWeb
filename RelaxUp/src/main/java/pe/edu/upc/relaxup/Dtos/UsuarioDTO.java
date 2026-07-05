@@ -1,13 +1,11 @@
 package pe.edu.upc.relaxup.Dtos;
 
-import jakarta.persistence.Column;
-
 public class UsuarioDTO {
     private int idUsuario;
-    private String Nombres;
-    private String Email;
-    private String Direccion;
-    private int Celular;
+    private String nombres;
+    private String email;
+    private String direccion;
+    private int celular;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -18,34 +16,34 @@ public class UsuarioDTO {
     }
 
     public String getNombres() {
-        return Nombres;
+        return nombres;
     }
 
     public void setNombres(String nombres) {
-        Nombres = nombres;
+        this.nombres = nombres;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getDireccion() {
-        return Direccion;
+        return direccion;
     }
 
     public void setDireccion(String direccion) {
-        Direccion = direccion;
+        this.direccion = direccion;
     }
 
     public int getCelular() {
-        return Celular;
+        return celular;
     }
 
     public void setCelular(int celular) {
-        Celular = celular;
+        this.celular = celular;
     }
 }

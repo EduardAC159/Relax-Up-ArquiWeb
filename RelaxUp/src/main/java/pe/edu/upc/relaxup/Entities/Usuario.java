@@ -11,26 +11,26 @@ public class Usuario
     private int idUsuario;
 
     @Column(name ="nombre" ,nullable = false,length =50 )
-    private String Nombres;
+    private String nombres;
 
     @Column(name ="email" ,nullable = false,length = 50)
-    private String Email;
+    private String email;
 
     @Column(name = "direccion",nullable = false,length = 50)
-    private String Direccion;
+    private String direccion;
 
     @Column(name = "celular",nullable = false)
-    private int Celular;
+    private int celular;
 
     public Usuario() {
     }
 
     public Usuario(int idUsuario, String nombres, String email, String direccion, int celular) {
         this.idUsuario = idUsuario;
-        Nombres = nombres;
-        Email = email;
-        Direccion = direccion;
-        Celular = celular;
+        this.nombres = nombres;
+        this.email = email;
+        this.direccion = direccion;
+        this.celular = celular;
     }
 
     public int getIdUsuario() {
@@ -42,35 +42,35 @@ public class Usuario
     }
 
     public String getNombres() {
-        return Nombres;
+        return nombres;
     }
 
     public void setNombres(String nombres) {
-        Nombres = nombres;
+        this.nombres = nombres;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getDireccion() {
-        return Direccion;
+        return direccion;
     }
 
     public void setDireccion(String direccion) {
-        Direccion = direccion;
+        this.direccion = direccion;
     }
 
     public int getCelular() {
-        return Celular;
+        return celular;
     }
 
     public void setCelular(int celular) {
-        Celular = celular;
+        this.celular = celular;
     }
 }
 

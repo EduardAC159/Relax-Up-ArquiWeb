@@ -32,7 +32,7 @@ public class InteraccionController {
     @Autowired
     private IComunidadService cS;
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> Listar(){
         ModelMapper m = new ModelMapper();

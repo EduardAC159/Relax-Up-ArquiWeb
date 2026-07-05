@@ -23,14 +23,14 @@ export class ComunidadList implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarCursos();
+    this.cargar();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.cargarCursos();
+        this.cargar();
       }
     });
   }
-  cargarCursos() {
+  cargar() {
     this.cS.list().subscribe({
       next: (data) => {
         this.dataSource.data = data;

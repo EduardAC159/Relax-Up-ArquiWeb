@@ -57,10 +57,10 @@ export class UsuarioRegister implements OnInit {
   aceptar(): void {
 
     if (this.form.valid) {
-      this.us.Nombres = this.form.value.nombre;
-      this.us.Email = this.form.value.correo;
-      this.us.Direccion = this.form.value.direccion;
-      this.us.Celular = this.form.value.celular;
+      this.us.nombres = this.form.value.nombre;
+      this.us.email = this.form.value.correo;
+      this.us.direccion= this.form.value.direccions;
+      this.us.celular= this.form.value.celulars;
       console.log(JSON.stringify(this.us));
       this.uS.insert(this.us).subscribe({
         next: () => {
