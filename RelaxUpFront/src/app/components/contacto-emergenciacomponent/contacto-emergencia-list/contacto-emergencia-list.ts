@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ContactoEmergencia } from '../../../models/contacto-emergencia';
 import { ContactoEmergenciaservice } from '../../../services/contacto-emergenciaservice';
+import { Usuarioservice } from '../../../services/usuarioservice';
 
 @Component({
   selector: 'app-contacto-emergencia-list',
@@ -19,6 +20,7 @@ export class ContactoEmergenciaList implements OnInit {
   constructor(
     private ceS: ContactoEmergenciaservice,
     private router: Router,
+    private uS: Usuarioservice,
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,14 @@ export class ContactoEmergenciaList implements OnInit {
       });
     });
   }
+  init() {
+
+    this.uS.list(this.id).subscribe((data) => {
+
+
+    });
+  }
+  
 }
 
 

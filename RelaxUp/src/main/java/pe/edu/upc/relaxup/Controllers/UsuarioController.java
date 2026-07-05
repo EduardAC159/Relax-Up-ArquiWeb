@@ -71,7 +71,20 @@ public class UsuarioController {
             return ResponseEntity.ok("usuario eliminado correctamente");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("machine no encontrado");
+                    .body("Usuario no encontrado");
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<Usuario> curso = uS.listId(id);
+
+        if (curso.isPresent()) {
+            UsuarioDTO dto = m.map(curso.get(), UsuarioDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Usuario no encontrado");
         }
     }
 }
