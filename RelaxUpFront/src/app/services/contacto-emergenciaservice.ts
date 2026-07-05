@@ -10,16 +10,19 @@ const base_url = environment.base;
   providedIn: 'root',
 })
 export class ContactoEmergenciaservice {
-    private url = `${base_url}/api/ContactoEmergencia`;
-      constructor(private http: HttpClient) {}
-    
-      list() {
-        return this.http.get<ContactoEmergencia[]>(`${this.url}/listar`);
-      }
-      insert(co: ContactoEmergencia) {
-        return this.http.post(`${this.url}/nuevo`, co);
-      }
-      delete(id: number) {
-        return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
-      }
+  private url = `${base_url}/api/ContactoEmergencia`;
+  constructor(private http: HttpClient) {}
+
+  list() {
+    return this.http.get<ContactoEmergencia[]>(`${this.url}/listar`);
+  }
+  insert(co: ContactoEmergencia) {
+    return this.http.post(`${this.url}/nuevo`, co);
+  }
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+  listByUsuario(id: number) {
+    return this.http.get<ContactoEmergencia[]>(`${this.url}/listar/${id}`);
+  }
 }

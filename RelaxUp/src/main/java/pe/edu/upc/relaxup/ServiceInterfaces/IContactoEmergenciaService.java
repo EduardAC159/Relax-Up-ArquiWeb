@@ -11,4 +11,5 @@ public interface IContactoEmergenciaService {
     public void update(ContactoEmergencia contactoEmergencia);
     public void delete(int id);
     public Optional<ContactoEmergencia> listId(int id);
+    public List<ContactoEmergencia> listarPorUsuario(int id);
 }

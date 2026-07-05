@@ -90,4 +90,22 @@ public class ContactoEmergenciaController {
                     .body("machine no encontrado");
         }
     }
+    @GetMapping("/listar/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> listarPorUsuario(@PathVariable int id) {
+
+        ModelMapper m = new ModelMapper();
+
+        List<ContactoEmergenciaDTO> lista = ceS.listarPorUsuario(id)
+                .stream()
+                .map(x -> m.map(x, ContactoEmergenciaDTO.class))
+                .collect(Collectors.toList());
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El usuario no tiene contactos de emergencia registrados");
+        }
+
+        return ResponseEntity.ok(lista);
+    }
 }

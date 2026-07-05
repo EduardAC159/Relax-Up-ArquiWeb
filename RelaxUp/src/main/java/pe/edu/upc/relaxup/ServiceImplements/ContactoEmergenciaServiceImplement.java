@@ -41,4 +41,9 @@ public class ContactoEmergenciaServiceImplement implements IContactoEmergenciaSe
     public Optional<ContactoEmergencia> listId(int id) {
         return ceR.findById(id);
     }
+
+    @Override
+    public List<ContactoEmergencia> listarPorUsuario(int id) {
+        return ceR.findByUsuarioIdUsuario(id);
+    }
 }

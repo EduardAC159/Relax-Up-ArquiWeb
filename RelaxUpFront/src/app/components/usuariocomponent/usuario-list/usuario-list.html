@@ -31,6 +31,15 @@
       </ng-container>
 
       <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef>Contactos</th>
+        <td mat-cell *matCellDef="let element">
+          <button matButton (click)="verContactos(element.idUsuario)" class="btn-eliminar">
+            <mat-icon>contacts</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c7">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
           <button matButton (click)="eliminar(element.idUsuario)" class="btn-eliminar">

@@ -79,7 +79,8 @@ public class InteraccionController {
                     .body("La comunidad no existe");
         }
         Interaccion i = m.map(dto, Interaccion.class);
-
+        i.setUsuario(user.get());
+        i.setComunidad(comu.get());
         Interaccion inte = iS.insert(i);
         InteraccionDTO responseDTO = m.map(inte, InteraccionDTO.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);

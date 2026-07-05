@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { Usuario } from '../../../models/usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
 
 @Component({
   selector: 'app-usuario-list',
-  imports: [MatTableModule,MatIconModule,MatButtonModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule],
   templateUrl: './usuario-list.html',
   styleUrl: './usuario-list.css',
 })
-export class UsuarioList  implements OnInit {
+export class UsuarioList implements OnInit {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6','c7'];
 
   constructor(
     private uS: Usuarioservice,
@@ -43,6 +43,7 @@ export class UsuarioList  implements OnInit {
       });
     });
   }
+  verContactos(id: number) {
+    this.router.navigate(['/contacto-emergencia/lista', id]);
+  }
 }
-
-

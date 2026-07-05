@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ContactoEmergencia } from '../../../models/contacto-emergencia';
 import { ContactoEmergenciaservice } from '../../../services/contacto-emergenciaservice';
 import { Usuarioservice } from '../../../services/usuarioservice';
+import { Usuario } from '../../../models/usuario';
+
 
 @Component({
   selector: 'app-contacto-emergencia-list',
@@ -15,45 +17,52 @@ import { Usuarioservice } from '../../../services/usuarioservice';
 })
 export class ContactoEmergenciaList implements OnInit {
   dataSource: MatTableDataSource<ContactoEmergencia> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5'];
+  id:number = 0;
+  nombreUsuario: string = '';
+  listaU: Usuario[] = [];
 
   constructor(
     private ceS: ContactoEmergenciaservice,
-    private router: Router,
+    private route: ActivatedRoute,
     private uS: Usuarioservice,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    this.cargar();
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.cargar();
+
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params['id'];
+
+      this.uS.listId(this.id).subscribe(usuario => {
+      this.nombreUsuario = usuario.Nombres; 
+    });
+      this.init();
+    });
+
+  }
+
+  init() {
+    this.ceS.listByUsuario(this.id).subscribe({
+      next: (data) => {
+        this.dataSource.data = data;
       }
     });
   }
-  cargar() {
-    this.ceS.list().subscribe({
-      next: (data) => {
-        this.dataSource.data = data;
-      },
-    });
-  }
+
   eliminar(id: number) {
-    this.ceS.delete(id).subscribe((data) => {
-      this.ceS.list().subscribe((data) => {
-        this.dataSource.data = data;
-      });
+    this.ceS.delete(id).subscribe(() => {
+      this.init();
     });
   }
-  init() {
 
-    this.uS.list(this.id).subscribe((data) => {
-
-
-    });
-  }
-  
+  irRegistrar() {
+  this.router.navigate(['/contacto-emergencia/news',this.id]);
 }
+}
+  
+  
+
 
 
 

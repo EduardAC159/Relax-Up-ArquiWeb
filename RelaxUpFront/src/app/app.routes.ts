@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { Homecomponent } from './components/homecomponent/homecomponent';
 import { Comunidadcomponent } from './components/comunidadcomponent/comunidadcomponent';
-import { LiteralMapSpreadAssignment } from '@angular/compiler';
 import { ComunidadList } from './components/comunidadcomponent/comunidad-list/comunidad-list';
 import { ComunidadRegister } from './components/comunidadcomponent/comunidad-register/comunidad-register';
 import { Usuariocomponent } from './components/usuariocomponent/usuariocomponent';
@@ -10,20 +9,32 @@ import { UsuarioRegister } from './components/usuariocomponent/usuario-register/
 import { Emergenciacomponent } from './components/emergenciacomponent/emergenciacomponent';
 import { EmergenciaList } from './components/emergenciacomponent/emergencia-list/emergencia-list';
 import { EmergenciaRegister } from './components/emergenciacomponent/emergencia-register/emergencia-register';
+import { ContactoEmergenciaList } from './components/contacto-emergenciacomponent/contacto-emergencia-list/contacto-emergencia-list';
+import { ContactoEmergenciacomponent } from './components/contacto-emergenciacomponent/contacto-emergenciacomponent';
+import { ContactoEmergenciaRegister } from './components/contacto-emergenciacomponent/contacto-emergencia-register/contacto-emergencia-register';
+import { Authenticate } from './components/authenticate/authenticate/authenticate';
+import { seguridadGuard } from './guard/seguridad-guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'homes',
+    redirectTo: 'login',
     pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: Authenticate,
   },
   {
     path: 'homes',
     component: Homecomponent,
+    canActivate: [seguridadGuard],
   },
   {
     path: 'comunidad',
     component: Comunidadcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       {
         path: 'lista',
@@ -38,6 +49,8 @@ export const routes: Routes = [
   {
     path: 'usuario',
     component: Usuariocomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       {
         path: 'lista',
@@ -52,6 +65,8 @@ export const routes: Routes = [
   {
     path: 'emergencia',
     component: Emergenciacomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       {
         path: 'lista',
@@ -60,6 +75,22 @@ export const routes: Routes = [
       {
         path: 'news',
         component: EmergenciaRegister,
+      },
+    ],
+  },
+  {
+    path: 'contacto-emergencia',
+    component: ContactoEmergenciacomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      {
+        path: 'lista/:id',
+        component: ContactoEmergenciaList,
+      },
+      {
+        path: 'news/:id',
+        component: ContactoEmergenciaRegister,
       },
     ],
   },
