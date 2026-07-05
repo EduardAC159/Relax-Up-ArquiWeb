@@ -226,6 +226,7 @@ export class ContactoEmergenciaList implements OnInit {
     console.log('🚀 Navegando a registrar contacto para usuario:', this.id);
     this.router.navigate(['/contacto-emergencia/news', this.id]);
   }
+  
 
   volver() {
     console.log('🔙 Volviendo a lista de usuarios');
