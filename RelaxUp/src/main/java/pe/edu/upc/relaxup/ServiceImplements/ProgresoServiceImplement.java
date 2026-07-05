@@ -24,8 +24,7 @@ public class ProgresoServiceImplement implements IProgresoService {
 
     @Override
     public void update(Progreso progreso) {
-        pR.delete(progreso);
-
+        pR.save(progreso);
     }
 
     @Override

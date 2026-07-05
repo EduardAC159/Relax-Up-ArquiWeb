@@ -1,0 +1,46 @@
+<div class="container">
+  <div style="text-align: center; margin: 2%">
+    <h2>{{ editMode ? 'Editar Progreso' : 'Registrar Progreso' }}</h2>
+  </div>
+  <div style="text-align: center; margin: 3%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
+
+      <mat-form-field>
+        <mat-label>Nivel de Control de Ira (0-10)</mat-label>
+        <input matInput type="number" min="0" max="10" formControlName="NivelControlIra" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="pickerFecha" formControlName="Fecha" />
+        <mat-datepicker-toggle matIconSuffix [for]="pickerFecha"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFecha></mat-datepicker>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Observaciones</mat-label>
+        <input matInput formControlName="Observaciones" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Meta Emocional</mat-label>
+        <mat-select formControlName="IdMetaEmocional">
+          @for (m of metas; track m.idMeta) {
+            <mat-option [value]="m.idMeta">{{ m.descripcion }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button matButton="elevated">{{ editMode ? 'Actualizar' : 'Registrar' }}</button>
+      </div>
+      <br />
+      <div>
+        <button matButton="elevated" routerLink="/homes">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

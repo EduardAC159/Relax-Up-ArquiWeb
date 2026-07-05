@@ -20,6 +20,15 @@ import { InteraccionRegister } from './components/interaccioncomponent/interacci
 import { MetaEmocionalcomponent } from './components/meta-emocionalcomponent/meta-emocionalcomponent';
 import { MetaEmocionalList } from './components/meta-emocionalcomponent/meta-emocional-list/meta-emocional-list';
 import { MetaEmocionalRegister } from './components/meta-emocionalcomponent/meta-emocional-register/meta-emocional-register';
+import { Recordatoriocomponent } from './components/recordatoriocomponent/recordatoriocomponent';
+import { RecordatorioList } from './components/recordatoriocomponent/recordatorio-list/recordatorio-list';
+import { RecordatorioRegister } from './components/recordatoriocomponent/recordatorio-register/recordatorio-register';
+import { Recursoscomponent } from './components/recursoscomponent/recursoscomponent';
+import { RecursosList } from './components/recursoscomponent/recursos-list/recursos-list';
+import { RecursosRegister } from './components/recursoscomponent/recursos-register/recursos-register';
+import { Progresocomponent } from './components/progresocomponent/progresocomponent';
+import { ProgresoList } from './components/progresocomponent/progreso-list/progreso-list';
+import { ProgresoRegister } from './components/progresocomponent/progreso-register/progreso-register';
 
 export const routes: Routes = [
   {
@@ -139,23 +148,74 @@ export const routes: Routes = [
     ],
   },
   {
-  path: 'meta-emocional',
-  component: MetaEmocionalcomponent,
-  canActivate: [seguridadGuard],
-  canActivateChild: [seguridadGuard],
-  children: [
-    {
-      path: 'lista',
-      component: MetaEmocionalList,
-    },
-    {
-      path: 'news',
-      component: MetaEmocionalRegister,
-    },
-    {
-      path: 'editar/:id',
-      component: MetaEmocionalRegister,
-    },
-  ],
-},
+    path: 'meta-emocional',
+    component: MetaEmocionalcomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      {
+        path: 'lista',
+        component: MetaEmocionalList,
+      },
+      {
+        path: 'news',
+        component: MetaEmocionalRegister,
+      },
+      {
+        path: 'editar/:id',
+        component: MetaEmocionalRegister,
+      },
+    ],
+  },
+  {
+    path: 'recordatorio',
+    component: Recordatoriocomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      {
+        path: 'lista',
+        component: RecordatorioList,
+      },
+      {
+        path: 'news',
+        component: RecordatorioRegister,
+      },
+      {
+        path: 'editar/:id',
+        component: RecordatorioRegister,
+      },
+    ],
+  },
+  {
+    path: 'recursos',
+    component: Recursoscomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      {
+        path: 'lista',
+        component: RecursosList,
+      },
+      {
+        path: 'news',
+        component: RecursosRegister,
+      },
+      {
+        path: 'editar/:id',
+        component: RecursosRegister,
+      },
+    ],
+  },
+  {
+    path: 'progreso',
+    component: Progresocomponent,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
+    children: [
+      { path: 'lista', component: ProgresoList },
+      { path: 'news', component: ProgresoRegister },
+      { path: 'editar/:id', component: ProgresoRegister },
+    ],
+  },
 ];

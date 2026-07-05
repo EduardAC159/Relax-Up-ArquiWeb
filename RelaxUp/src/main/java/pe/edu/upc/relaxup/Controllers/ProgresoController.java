@@ -29,6 +29,21 @@ public class ProgresoController {
         return ResponseEntity.ok(ListarProgreso);
     }
 
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<Progreso> progreso = pS.listId(id);
+
+        if (progreso.isPresent()) {
+            ProgresoDTO dto = m.map(progreso.get(), ProgresoDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Progreso no encontrado");
+        }
+    }
+    
     @PostMapping("/nuevo")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody ProgresoDTO dto){
@@ -59,5 +74,18 @@ public class ProgresoController {
         pS.update(pro);
 
         return ResponseEntity.ok("Recodatorio actualizado correctamente");
+    }
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<String> eliminar(@PathVariable int id) {
+        Optional<Progreso> existente = pS.listId(id);
+
+        if (existente.isPresent()) {
+            pS.delete(id);
+            return ResponseEntity.ok("Progreso eliminado correctamente");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Progreso no encontrado");
+        }
     }
 }
