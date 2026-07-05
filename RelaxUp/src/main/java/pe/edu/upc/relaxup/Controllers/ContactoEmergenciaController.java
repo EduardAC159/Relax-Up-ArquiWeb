@@ -56,6 +56,20 @@ public class ContactoEmergenciaController {
                 .status(HttpStatus.CREATED)
                 .body(responseDTO);
     }
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Optional<ContactoEmergencia> contacto = ceS.listId(id);
+
+        if (contacto.isPresent()) {
+            ContactoEmergenciaDTO dto = m.map(contacto.get(), ContactoEmergenciaDTO.class);
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Contacto de emergencia no encontrado");
+        }
+    }
 
     @PutMapping("/actualiza")
     @PreAuthorize("hasAuthority('ADMIN')")

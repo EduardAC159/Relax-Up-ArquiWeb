@@ -25,4 +25,10 @@ export class ContactoEmergenciaservice {
   listByUsuario(id: number) {
     return this.http.get<ContactoEmergencia[]>(`${this.url}/listar/${id}`);
   }
+  update(co: ContactoEmergencia) {
+    return this.http.put(`${this.url}/actualiza`, co, { responseType: 'text' });
+  }
+  listId(id: number) {
+    return this.http.get<ContactoEmergencia>(`${this.url}/${id}`);
+  }
 }

@@ -1,24 +1,23 @@
-<div class="container" style="text-align: center; padding: 20px;">
+<div class="container" style="text-align: center; padding: 20px">
   <h2 style="margin: 3%">Lista de Contactos de {{ nombreUsuario }}</h2>
-  
-  <div style="margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-    <button mat-raised-button color="primary" (click)="irRegistrar()">
-      + Registrar contacto
-    </button>
-    <button mat-raised-button color="accent" (click)="volver()">
-      ← Volver a usuarios
-    </button>
+
+  <div
+    style="margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap"
+  >
+    <button mat-raised-button color="primary" (click)="irRegistrar()">+ Registrar contacto</button>
+    <button mat-raised-button color="accent" (click)="volver()">← Volver a usuarios</button>
   </div>
-  
+
   <!-- ✅ ngIf ahora funciona correctamente -->
-  <div *ngIf="dataSource.data.length === 0 && nombreUsuario !== 'Cargando...'" 
-       style="padding: 40px; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px;">
-    <p style="color: #666; font-size: 16px;">No hay contactos registrados para este usuario</p>
+  <div
+    *ngIf="dataSource.data.length === 0 && nombreUsuario !== 'Cargando...'"
+    style="padding: 40px; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px"
+  >
+    <p style="color: #666; font-size: 16px">No hay contactos registrados para este usuario</p>
   </div>
-  
+
   <div *ngIf="dataSource.data.length > 0">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      
       <!-- ID -->
       <ng-container matColumnDef="c1">
         <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -47,11 +46,27 @@
       <ng-container matColumnDef="c5">
         <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button 
-                  (click)="eliminar(element.idContacto)" 
-                  [disabled]="!element.idContacto"
-                  class="btn-eliminar">
+          <button
+            mat-button
+            (click)="eliminar(element.idContacto)"
+            [disabled]="!element.idContacto"
+            class="btn-eliminar"
+          >
             <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="c6">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-button
+            (click)="editar(element.idContacto)"
+            [disabled]="!element.idContacto"
+            class="btn-editar"
+          >
+            <mat-icon>edit</mat-icon>
           </button>
         </td>
       </ng-container>

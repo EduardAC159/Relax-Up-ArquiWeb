@@ -106,6 +106,12 @@ export const routes: Routes = [
       {
         path: 'news/:id',
         component: ContactoEmergenciaRegister,
+        data: { mode: 'create' },
+      },
+      {
+        path: 'editar/:id',
+        component: ContactoEmergenciaRegister,
+        data: { mode: 'edit' },
       },
     ],
   },

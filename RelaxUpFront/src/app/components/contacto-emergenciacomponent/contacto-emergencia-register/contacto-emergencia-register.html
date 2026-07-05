@@ -1,6 +1,6 @@
 <div class="container">
   <h3 style="text-align: center; margin-bottom: 15px">
-    Registrando contacto para: {{ nombreUsuario }}
+    {{ editMode ? 'Editando contacto de: ' : 'Registrando contacto para: ' }}{{ nombreUsuario }}
   </h3>
 
   <div style="text-align: center; margin: 3%">
@@ -25,7 +25,7 @@
       </mat-form-field>
 
       <div>
-        <button matButton="elevated">Registrar</button>
+        <button matButton="elevated">{{ editMode ? 'Actualizar' : 'Registrar' }}</button>
       </div>
       <div>
         <button matButton="elevated" routerLink="/homes">Cancelar</button>

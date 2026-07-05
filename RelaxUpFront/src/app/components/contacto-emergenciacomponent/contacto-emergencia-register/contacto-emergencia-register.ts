@@ -34,6 +34,7 @@ export class ContactoEmergenciaRegister implements OnInit {
   ce: ContactoEmergencia = new ContactoEmergencia();
   idUsuario: number = 0;
   nombreUsuario: string = '';
+  editMode: boolean = false;
 
   constructor(
     private uS: Usuarioservice,
@@ -44,34 +45,63 @@ export class ContactoEmergenciaRegister implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.idUsuario = +params['id'];
-
-      this.uS.listId(this.idUsuario).subscribe(data => {
-      this.nombreUsuario = data.nombres; 
-    });
-    });
-
     this.form = this.formBuilder.group({
       Nombre: ['', Validators.required],
       Celular: ['', Validators.required],
       Relacion: ['', Validators.required],
     });
-  }
-  aceptar(): void {
-  if (this.form.valid) {
 
-    this.ce.nombre = this.form.value.Nombre;
-    this.ce.celular = this.form.value.Celular;
-    this.ce.relacion = this.form.value.Relacion;
+    this.editMode = this.route.snapshot.data['mode'] === 'edit';
 
-    this.ce.idUsuario = this.idUsuario;
+    this.route.params.subscribe((params: Params) => {
+      const id = +params['id'];
 
-    this.ceS.insert(this.ce).subscribe({
-      next: () => {
-        this.router.navigate(['/contacto-emergencia/lista', this.idUsuario]);
-      },
+      if (this.editMode) {
+        // Aquí "id" es el idContacto
+        this.ceS.listId(id).subscribe(data => {
+          this.ce = data;
+          this.idUsuario = data.idUsuario;
+
+          this.form.patchValue({
+            Nombre: data.nombre,
+            Celular: data.celular,
+            Relacion: data.relacion,
+          });
+
+          this.uS.listId(this.idUsuario).subscribe(u => {
+            this.nombreUsuario = u.nombres;
+          });
+        });
+      } else {
+        // Aquí "id" es el idUsuario (comportamiento original)
+        this.idUsuario = id;
+        this.uS.listId(this.idUsuario).subscribe(data => {
+          this.nombreUsuario = data.nombres;
+        });
+      }
     });
   }
-}
+  aceptar(): void {
+    if (this.form.valid) {
+
+      this.ce.nombre = this.form.value.Nombre;
+      this.ce.celular = this.form.value.Celular;
+      this.ce.relacion = this.form.value.Relacion;
+      this.ce.idUsuario = this.idUsuario;
+
+      if (this.editMode) {
+        this.ceS.update(this.ce).subscribe({
+          next: () => {
+            this.router.navigate(['/contacto-emergencia/lista', this.idUsuario]);
+          },
+        });
+      } else {
+        this.ceS.insert(this.ce).subscribe({
+          next: () => {
+            this.router.navigate(['/contacto-emergencia/lista', this.idUsuario]);
+          },
+        });
+      }
+    }
+  }
 }
